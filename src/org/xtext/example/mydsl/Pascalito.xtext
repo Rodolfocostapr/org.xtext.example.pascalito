@@ -45,11 +45,9 @@ Procedimento returns Procedimento:
 	;
 	
 CallProcedimento returns CallProcedimento:
-	'CallProcedimento'
-	'{'
-		'definido' definido=[Procedimento|EString]
-		('parametro' '{' parametro+=Expressao ( "," parametro+=Expressao)* '}' )?
-	'}';
+definido=[Procedimento|ID]
+		( '(' (parametro+=Expressao ( "," parametro+=Expressao)* )? ')' )
+	';';
 
 Atribuicao returns Atribuicao:
 		atribui=[Variavel|ID]
@@ -71,18 +69,22 @@ EBigDecimal returns ecore::EBigDecimal:
 	INT? '.' INT;
 
 CallVariavel returns CallVariavel:
-	'CallVariavel'
-	'{'
-		('Prioridade' Prioridade=EBigDecimal)?
-		'representa' representa=[Variavel|ID]
-	'}';
+
+		representa=[Variavel|ID]
+	;
 	
 CallProc returns CallProc:
 	'CallProc'
 	'{'
-		('Prioridade' Prioridade=EBigDecimal)?
 		'representaProc' representaProc=[Procedimento|ID]
 	'}';
+	
+//CallProc returns CallProc:
+//	'CallProc'
+//	'{'
+//		('Prioridade' Prioridade=EBigDecimal)?
+//		'representaProc' representaProc=[Procedimento|ID]
+//	'}';
 
 Number returns Number:
 	{Number}

@@ -17,6 +17,7 @@ import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransi
 import org.xtext.example.mydsl.services.PascalitoGrammarAccess;
 import pascalito.Atribuicao;
 import pascalito.Bloco;
+import pascalito.CallProc;
 import pascalito.CallProcedimento;
 import pascalito.CallVariavel;
 import pascalito.Desvio;
@@ -48,6 +49,9 @@ public class PascalitoSemanticSequencer extends AbstractDelegatingSemanticSequen
 				return; 
 			case PascalitoPackage.BLOCO:
 				sequence_Bloco(context, (Bloco) semanticObject); 
+				return; 
+			case PascalitoPackage.CALL_PROC:
+				sequence_CallProc(context, (CallProc) semanticObject); 
 				return; 
 			case PascalitoPackage.CALL_PROCEDIMENTO:
 				sequence_CallProcedimento(context, (CallProcedimento) semanticObject); 
@@ -123,11 +127,23 @@ public class PascalitoSemanticSequencer extends AbstractDelegatingSemanticSequen
 	
 	/**
 	 * Contexts:
+	 *     CallProc returns CallProc
+	 *
+	 * Constraint:
+	 *     (Prioridade=EBigDecimal? representaProc=[Procedimento|ID])
+	 */
+	protected void sequence_CallProc(ISerializationContext context, CallProc semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
 	 *     Comando returns CallProcedimento
 	 *     CallProcedimento returns CallProcedimento
 	 *
 	 * Constraint:
-	 *     (definido=[Procedimento|EString] (parametro+=Expressao parametro+=Expressao*)?)
+	 *     (definido=[Procedimento|ID] (parametro+=Expressao parametro+=Expressao*)?)
 	 */
 	protected void sequence_CallProcedimento(ISerializationContext context, CallProcedimento semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -140,10 +156,16 @@ public class PascalitoSemanticSequencer extends AbstractDelegatingSemanticSequen
 	 *     CallVariavel returns CallVariavel
 	 *
 	 * Constraint:
-	 *     (Prioridade=EBigDecimal? representa=[Variavel|EString])
+	 *     representa=[Variavel|ID]
 	 */
 	protected void sequence_CallVariavel(ISerializationContext context, CallVariavel semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, PascalitoPackage.Literals.CALL_VARIAVEL__REPRESENTA) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, PascalitoPackage.Literals.CALL_VARIAVEL__REPRESENTA));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getCallVariavelAccess().getRepresentaVariavelIDTerminalRuleCall_0_1(), semanticObject.getRepresenta());
+		feeder.finish();
 	}
 	
 	

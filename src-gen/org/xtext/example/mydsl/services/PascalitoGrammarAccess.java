@@ -335,85 +335,70 @@ public class PascalitoGrammarAccess extends AbstractGrammarElementFinder {
 	public class CallProcedimentoElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.example.mydsl.Pascalito.CallProcedimento");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cCallProcedimentoKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Keyword cLeftCurlyBracketKeyword_1 = (Keyword)cGroup.eContents().get(1);
-		private final Keyword cDefinidoKeyword_2 = (Keyword)cGroup.eContents().get(2);
-		private final Assignment cDefinidoAssignment_3 = (Assignment)cGroup.eContents().get(3);
-		private final CrossReference cDefinidoProcedimentoCrossReference_3_0 = (CrossReference)cDefinidoAssignment_3.eContents().get(0);
-		private final RuleCall cDefinidoProcedimentoEStringParserRuleCall_3_0_1 = (RuleCall)cDefinidoProcedimentoCrossReference_3_0.eContents().get(1);
-		private final Group cGroup_4 = (Group)cGroup.eContents().get(4);
-		private final Keyword cParametroKeyword_4_0 = (Keyword)cGroup_4.eContents().get(0);
-		private final Keyword cLeftCurlyBracketKeyword_4_1 = (Keyword)cGroup_4.eContents().get(1);
-		private final Assignment cParametroAssignment_4_2 = (Assignment)cGroup_4.eContents().get(2);
-		private final RuleCall cParametroExpressaoParserRuleCall_4_2_0 = (RuleCall)cParametroAssignment_4_2.eContents().get(0);
-		private final Group cGroup_4_3 = (Group)cGroup_4.eContents().get(3);
-		private final Keyword cCommaKeyword_4_3_0 = (Keyword)cGroup_4_3.eContents().get(0);
-		private final Assignment cParametroAssignment_4_3_1 = (Assignment)cGroup_4_3.eContents().get(1);
-		private final RuleCall cParametroExpressaoParserRuleCall_4_3_1_0 = (RuleCall)cParametroAssignment_4_3_1.eContents().get(0);
-		private final Keyword cRightCurlyBracketKeyword_4_4 = (Keyword)cGroup_4.eContents().get(4);
-		private final Keyword cRightCurlyBracketKeyword_5 = (Keyword)cGroup.eContents().get(5);
+		private final Assignment cDefinidoAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final CrossReference cDefinidoProcedimentoCrossReference_0_0 = (CrossReference)cDefinidoAssignment_0.eContents().get(0);
+		private final RuleCall cDefinidoProcedimentoIDTerminalRuleCall_0_0_1 = (RuleCall)cDefinidoProcedimentoCrossReference_0_0.eContents().get(1);
+		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
+		private final Keyword cLeftParenthesisKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
+		private final Group cGroup_1_1 = (Group)cGroup_1.eContents().get(1);
+		private final Assignment cParametroAssignment_1_1_0 = (Assignment)cGroup_1_1.eContents().get(0);
+		private final RuleCall cParametroExpressaoParserRuleCall_1_1_0_0 = (RuleCall)cParametroAssignment_1_1_0.eContents().get(0);
+		private final Group cGroup_1_1_1 = (Group)cGroup_1_1.eContents().get(1);
+		private final Keyword cCommaKeyword_1_1_1_0 = (Keyword)cGroup_1_1_1.eContents().get(0);
+		private final Assignment cParametroAssignment_1_1_1_1 = (Assignment)cGroup_1_1_1.eContents().get(1);
+		private final RuleCall cParametroExpressaoParserRuleCall_1_1_1_1_0 = (RuleCall)cParametroAssignment_1_1_1_1.eContents().get(0);
+		private final Keyword cRightParenthesisKeyword_1_2 = (Keyword)cGroup_1.eContents().get(2);
+		private final Keyword cSemicolonKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		
 		//CallProcedimento:
-		//	'CallProcedimento'
-		//	'{'
-		//	'definido' definido=[Procedimento|EString] ('parametro' '{' parametro+=Expressao ("," parametro+=Expressao)* '}')?
-		//	'}';
+		//	definido=[Procedimento] ('(' (parametro+=Expressao ("," parametro+=Expressao)*)? ')')
+		//	';';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'CallProcedimento' '{' 'definido' definido=[Procedimento|EString] ('parametro' '{' parametro+=Expressao (","
-		//parametro+=Expressao)* '}')? '}'
+		//definido=[Procedimento] ('(' (parametro+=Expressao ("," parametro+=Expressao)*)? ')') ';'
 		public Group getGroup() { return cGroup; }
 		
-		//'CallProcedimento'
-		public Keyword getCallProcedimentoKeyword_0() { return cCallProcedimentoKeyword_0; }
+		//definido=[Procedimento]
+		public Assignment getDefinidoAssignment_0() { return cDefinidoAssignment_0; }
 		
-		//'{'
-		public Keyword getLeftCurlyBracketKeyword_1() { return cLeftCurlyBracketKeyword_1; }
+		//[Procedimento]
+		public CrossReference getDefinidoProcedimentoCrossReference_0_0() { return cDefinidoProcedimentoCrossReference_0_0; }
 		
-		//'definido'
-		public Keyword getDefinidoKeyword_2() { return cDefinidoKeyword_2; }
+		//ID
+		public RuleCall getDefinidoProcedimentoIDTerminalRuleCall_0_0_1() { return cDefinidoProcedimentoIDTerminalRuleCall_0_0_1; }
 		
-		//definido=[Procedimento|EString]
-		public Assignment getDefinidoAssignment_3() { return cDefinidoAssignment_3; }
+		//('(' (parametro+=Expressao ("," parametro+=Expressao)*)? ')')
+		public Group getGroup_1() { return cGroup_1; }
 		
-		//[Procedimento|EString]
-		public CrossReference getDefinidoProcedimentoCrossReference_3_0() { return cDefinidoProcedimentoCrossReference_3_0; }
+		//'('
+		public Keyword getLeftParenthesisKeyword_1_0() { return cLeftParenthesisKeyword_1_0; }
 		
-		//EString
-		public RuleCall getDefinidoProcedimentoEStringParserRuleCall_3_0_1() { return cDefinidoProcedimentoEStringParserRuleCall_3_0_1; }
-		
-		//('parametro' '{' parametro+=Expressao ("," parametro+=Expressao)* '}')?
-		public Group getGroup_4() { return cGroup_4; }
-		
-		//'parametro'
-		public Keyword getParametroKeyword_4_0() { return cParametroKeyword_4_0; }
-		
-		//'{'
-		public Keyword getLeftCurlyBracketKeyword_4_1() { return cLeftCurlyBracketKeyword_4_1; }
+		//(parametro+=Expressao ("," parametro+=Expressao)*)?
+		public Group getGroup_1_1() { return cGroup_1_1; }
 		
 		//parametro+=Expressao
-		public Assignment getParametroAssignment_4_2() { return cParametroAssignment_4_2; }
+		public Assignment getParametroAssignment_1_1_0() { return cParametroAssignment_1_1_0; }
 		
 		//Expressao
-		public RuleCall getParametroExpressaoParserRuleCall_4_2_0() { return cParametroExpressaoParserRuleCall_4_2_0; }
+		public RuleCall getParametroExpressaoParserRuleCall_1_1_0_0() { return cParametroExpressaoParserRuleCall_1_1_0_0; }
 		
 		//("," parametro+=Expressao)*
-		public Group getGroup_4_3() { return cGroup_4_3; }
+		public Group getGroup_1_1_1() { return cGroup_1_1_1; }
 		
 		//","
-		public Keyword getCommaKeyword_4_3_0() { return cCommaKeyword_4_3_0; }
+		public Keyword getCommaKeyword_1_1_1_0() { return cCommaKeyword_1_1_1_0; }
 		
 		//parametro+=Expressao
-		public Assignment getParametroAssignment_4_3_1() { return cParametroAssignment_4_3_1; }
+		public Assignment getParametroAssignment_1_1_1_1() { return cParametroAssignment_1_1_1_1; }
 		
 		//Expressao
-		public RuleCall getParametroExpressaoParserRuleCall_4_3_1_0() { return cParametroExpressaoParserRuleCall_4_3_1_0; }
+		public RuleCall getParametroExpressaoParserRuleCall_1_1_1_1_0() { return cParametroExpressaoParserRuleCall_1_1_1_1_0; }
 		
-		//'}'
-		public Keyword getRightCurlyBracketKeyword_4_4() { return cRightCurlyBracketKeyword_4_4; }
+		//')'
+		public Keyword getRightParenthesisKeyword_1_2() { return cRightParenthesisKeyword_1_2; }
 		
-		//'}'
-		public Keyword getRightCurlyBracketKeyword_5() { return cRightCurlyBracketKeyword_5; }
+		//';'
+		public Keyword getSemicolonKeyword_2() { return cSemicolonKeyword_2; }
 	}
 	public class AtribuicaoElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.example.mydsl.Pascalito.Atribuicao");
@@ -600,31 +585,50 @@ public class PascalitoGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	public class CallVariavelElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.example.mydsl.Pascalito.CallVariavel");
+		private final Assignment cRepresentaAssignment = (Assignment)rule.eContents().get(1);
+		private final CrossReference cRepresentaVariavelCrossReference_0 = (CrossReference)cRepresentaAssignment.eContents().get(0);
+		private final RuleCall cRepresentaVariavelIDTerminalRuleCall_0_1 = (RuleCall)cRepresentaVariavelCrossReference_0.eContents().get(1);
+		
+		//CallVariavel:
+		//	representa=[Variavel];
+		@Override public ParserRule getRule() { return rule; }
+		
+		//representa=[Variavel]
+		public Assignment getRepresentaAssignment() { return cRepresentaAssignment; }
+		
+		//[Variavel]
+		public CrossReference getRepresentaVariavelCrossReference_0() { return cRepresentaVariavelCrossReference_0; }
+		
+		//ID
+		public RuleCall getRepresentaVariavelIDTerminalRuleCall_0_1() { return cRepresentaVariavelIDTerminalRuleCall_0_1; }
+	}
+	public class CallProcElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.example.mydsl.Pascalito.CallProc");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cCallVariavelKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Keyword cCallProcKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Keyword cLeftCurlyBracketKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
 		private final Keyword cPrioridadeKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
 		private final Assignment cPrioridadeAssignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
 		private final RuleCall cPrioridadeEBigDecimalParserRuleCall_2_1_0 = (RuleCall)cPrioridadeAssignment_2_1.eContents().get(0);
-		private final Keyword cRepresentaKeyword_3 = (Keyword)cGroup.eContents().get(3);
-		private final Assignment cRepresentaAssignment_4 = (Assignment)cGroup.eContents().get(4);
-		private final CrossReference cRepresentaVariavelCrossReference_4_0 = (CrossReference)cRepresentaAssignment_4.eContents().get(0);
-		private final RuleCall cRepresentaVariavelEStringParserRuleCall_4_0_1 = (RuleCall)cRepresentaVariavelCrossReference_4_0.eContents().get(1);
+		private final Keyword cRepresentaProcKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		private final Assignment cRepresentaProcAssignment_4 = (Assignment)cGroup.eContents().get(4);
+		private final CrossReference cRepresentaProcProcedimentoCrossReference_4_0 = (CrossReference)cRepresentaProcAssignment_4.eContents().get(0);
+		private final RuleCall cRepresentaProcProcedimentoIDTerminalRuleCall_4_0_1 = (RuleCall)cRepresentaProcProcedimentoCrossReference_4_0.eContents().get(1);
 		private final Keyword cRightCurlyBracketKeyword_5 = (Keyword)cGroup.eContents().get(5);
 		
-		//CallVariavel:
-		//	'CallVariavel'
+		//CallProc:
+		//	'CallProc'
 		//	'{' ('Prioridade' Prioridade=EBigDecimal)?
-		//	'representa' representa=[Variavel|EString]
+		//	'representaProc' representaProc=[Procedimento]
 		//	'}';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'CallVariavel' '{' ('Prioridade' Prioridade=EBigDecimal)? 'representa' representa=[Variavel|EString] '}'
+		//'CallProc' '{' ('Prioridade' Prioridade=EBigDecimal)? 'representaProc' representaProc=[Procedimento] '}'
 		public Group getGroup() { return cGroup; }
 		
-		//'CallVariavel'
-		public Keyword getCallVariavelKeyword_0() { return cCallVariavelKeyword_0; }
+		//'CallProc'
+		public Keyword getCallProcKeyword_0() { return cCallProcKeyword_0; }
 		
 		//'{'
 		public Keyword getLeftCurlyBracketKeyword_1() { return cLeftCurlyBracketKeyword_1; }
@@ -641,17 +645,17 @@ public class PascalitoGrammarAccess extends AbstractGrammarElementFinder {
 		//EBigDecimal
 		public RuleCall getPrioridadeEBigDecimalParserRuleCall_2_1_0() { return cPrioridadeEBigDecimalParserRuleCall_2_1_0; }
 		
-		//'representa'
-		public Keyword getRepresentaKeyword_3() { return cRepresentaKeyword_3; }
+		//'representaProc'
+		public Keyword getRepresentaProcKeyword_3() { return cRepresentaProcKeyword_3; }
 		
-		//representa=[Variavel|EString]
-		public Assignment getRepresentaAssignment_4() { return cRepresentaAssignment_4; }
+		//representaProc=[Procedimento]
+		public Assignment getRepresentaProcAssignment_4() { return cRepresentaProcAssignment_4; }
 		
-		//[Variavel|EString]
-		public CrossReference getRepresentaVariavelCrossReference_4_0() { return cRepresentaVariavelCrossReference_4_0; }
+		//[Procedimento]
+		public CrossReference getRepresentaProcProcedimentoCrossReference_4_0() { return cRepresentaProcProcedimentoCrossReference_4_0; }
 		
-		//EString
-		public RuleCall getRepresentaVariavelEStringParserRuleCall_4_0_1() { return cRepresentaVariavelEStringParserRuleCall_4_0_1; }
+		//ID
+		public RuleCall getRepresentaProcProcedimentoIDTerminalRuleCall_4_0_1() { return cRepresentaProcProcedimentoIDTerminalRuleCall_4_0_1; }
 		
 		//'}'
 		public Keyword getRightCurlyBracketKeyword_5() { return cRightCurlyBracketKeyword_5; }
@@ -988,6 +992,7 @@ public class PascalitoGrammarAccess extends AbstractGrammarElementFinder {
 	private final LoopElements pLoop;
 	private final EBigDecimalElements pEBigDecimal;
 	private final CallVariavelElements pCallVariavel;
+	private final CallProcElements pCallProc;
 	private final NumberElements pNumber;
 	private final ExpBinLogicaElements pExpBinLogica;
 	private final ExpBinElements pExpBin;
@@ -1017,6 +1022,7 @@ public class PascalitoGrammarAccess extends AbstractGrammarElementFinder {
 		this.pLoop = new LoopElements();
 		this.pEBigDecimal = new EBigDecimalElements();
 		this.pCallVariavel = new CallVariavelElements();
+		this.pCallProc = new CallProcElements();
 		this.pNumber = new NumberElements();
 		this.pExpBinLogica = new ExpBinLogicaElements();
 		this.pExpBin = new ExpBinElements();
@@ -1133,10 +1139,8 @@ public class PascalitoGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//CallProcedimento:
-	//	'CallProcedimento'
-	//	'{'
-	//	'definido' definido=[Procedimento|EString] ('parametro' '{' parametro+=Expressao ("," parametro+=Expressao)* '}')?
-	//	'}';
+	//	definido=[Procedimento] ('(' (parametro+=Expressao ("," parametro+=Expressao)*)? ')')
+	//	';';
 	public CallProcedimentoElements getCallProcedimentoAccess() {
 		return pCallProcedimento;
 	}
@@ -1189,16 +1193,26 @@ public class PascalitoGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//CallVariavel:
-	//	'CallVariavel'
-	//	'{' ('Prioridade' Prioridade=EBigDecimal)?
-	//	'representa' representa=[Variavel|EString]
-	//	'}';
+	//	representa=[Variavel];
 	public CallVariavelElements getCallVariavelAccess() {
 		return pCallVariavel;
 	}
 	
 	public ParserRule getCallVariavelRule() {
 		return getCallVariavelAccess().getRule();
+	}
+	
+	//CallProc:
+	//	'CallProc'
+	//	'{' ('Prioridade' Prioridade=EBigDecimal)?
+	//	'representaProc' representaProc=[Procedimento]
+	//	'}';
+	public CallProcElements getCallProcAccess() {
+		return pCallProc;
+	}
+	
+	public ParserRule getCallProcRule() {
+		return getCallProcAccess().getRule();
 	}
 	
 	//Number:
