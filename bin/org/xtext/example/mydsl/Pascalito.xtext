@@ -68,16 +68,16 @@ Loop returns Loop:
 EBigDecimal returns ecore::EBigDecimal:
 	INT? '.' INT;
 
-CallVariavel returns CallVariavel:
-
-		representa=[Variavel|ID]
-	;
-	
 CallProc returns CallProc:
 	'CallProc'
 	'{'
 		'representaProc' representaProc=[Procedimento|ID]
 	'}';
+
+CallVariavel returns CallVariavel:
+
+		representa=[Variavel|ID]
+	;
 	
 //CallProc returns CallProc:
 //	'CallProc'
