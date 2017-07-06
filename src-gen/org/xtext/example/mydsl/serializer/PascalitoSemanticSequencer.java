@@ -22,7 +22,6 @@ import pascalito.CallProcedimento;
 import pascalito.CallVariavel;
 import pascalito.Desvio;
 import pascalito.ExpBin;
-import pascalito.ExpBinLogica;
 import pascalito.ExpNeg;
 import pascalito.Loop;
 import pascalito.PascalitoPackage;
@@ -64,9 +63,6 @@ public class PascalitoSemanticSequencer extends AbstractDelegatingSemanticSequen
 				return; 
 			case PascalitoPackage.EXP_BIN:
 				sequence_ExpBin(context, (ExpBin) semanticObject); 
-				return; 
-			case PascalitoPackage.EXP_BIN_LOGICA:
-				sequence_ExpBinLogica(context, (ExpBinLogica) semanticObject); 
 				return; 
 			case PascalitoPackage.EXP_NEG:
 				sequence_ExpNeg(context, (ExpNeg) semanticObject); 
@@ -127,10 +123,11 @@ public class PascalitoSemanticSequencer extends AbstractDelegatingSemanticSequen
 	
 	/**
 	 * Contexts:
+	 *     Expressao returns CallProc
 	 *     CallProc returns CallProc
 	 *
 	 * Constraint:
-	 *     (Prioridade=EBigDecimal? representaProc=[Procedimento|ID])
+	 *     (representaProc=[Procedimento|ID] (parametro+=Expressao parametro+=Expressao*)?)
 	 */
 	protected void sequence_CallProc(ISerializationContext context, CallProc semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -184,27 +181,23 @@ public class PascalitoSemanticSequencer extends AbstractDelegatingSemanticSequen
 	
 	/**
 	 * Contexts:
-	 *     Expressao returns ExpBinLogica
-	 *     ExpBinLogica returns ExpBinLogica
-	 *
-	 * Constraint:
-	 *     (Comutativa?='Comutativa'? Prioridade=EBigDecimal? Operador=EString? operandoEsq=Expressao operandoDir=Expressao)
-	 */
-	protected void sequence_ExpBinLogica(ISerializationContext context, ExpBinLogica semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * Contexts:
 	 *     Expressao returns ExpBin
 	 *     ExpBin returns ExpBin
 	 *
 	 * Constraint:
-	 *     (Comutativa?='Comutativa'? Prioridade=EBigDecimal? Operador=EString? operandoDir=Expressao operandoEsq=Expressao)
+	 *     (operandoEsq=Expressao operandoDir=Expressao)
 	 */
 	protected void sequence_ExpBin(ISerializationContext context, ExpBin semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, PascalitoPackage.Literals.EXP_BIN__OPERANDO_ESQ) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, PascalitoPackage.Literals.EXP_BIN__OPERANDO_ESQ));
+			if (transientValues.isValueTransient(semanticObject, PascalitoPackage.Literals.EXP_BIN__OPERANDO_DIR) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, PascalitoPackage.Literals.EXP_BIN__OPERANDO_DIR));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getExpBinAccess().getOperandoEsqExpressaoParserRuleCall_1_0(), semanticObject.getOperandoEsq());
+		feeder.accept(grammarAccess.getExpBinAccess().getOperandoDirExpressaoParserRuleCall_4_0(), semanticObject.getOperandoDir());
+		feeder.finish();
 	}
 	
 	

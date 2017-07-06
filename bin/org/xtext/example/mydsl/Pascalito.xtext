@@ -19,7 +19,7 @@ Comando returns Comando:
 	CallProcedimento | Atribuicao | Desvio | Loop;
 
 Expressao returns Expressao:
-	CallVariavel | Number | ExpBinLogica | ExpBin | ExpNeg;
+	CallVariavel | CallProc |Number | ExpBinLogica | ExpBin | ExpNeg;
 
 EString returns ecore::EString:
 	STRING | ID;
@@ -51,7 +51,7 @@ definido=[Procedimento|ID]
 
 Atribuicao returns Atribuicao:
 		atribui=[Variavel|ID]
-		'->' atribuiResultado=Expressao ';'
+		OT_ASSIGNMENT atribuiResultado=Expressao ';'
 		;
 
 Desvio returns Desvio:
@@ -69,22 +69,12 @@ EBigDecimal returns ecore::EBigDecimal:
 	INT? '.' INT;
 
 CallProc returns CallProc:
-	'CallProc'
-	'{'
-		'representaProc' representaProc=[Procedimento|ID]
-	'}';
+representaProc=[Procedimento|ID]
+	( '(' (parametro+=Expressao ( "," parametro+=Expressao)* )? ')' );
 
 CallVariavel returns CallVariavel:
-
 		representa=[Variavel|ID]
 	;
-	
-//CallProc returns CallProc:
-//	'CallProc'
-//	'{'
-//		('Prioridade' Prioridade=EBigDecimal)?
-//		'representaProc' representaProc=[Procedimento|ID]
-//	'}';
 
 Number returns Number:
 	{Number}
@@ -92,24 +82,27 @@ Number returns Number:
 	;
 
 ExpBinLogica returns ExpBinLogica:
-	(Comutativa?='Comutativa')?
-	'ExpBinLogica'
-	'{'
-		('Prioridade' Prioridade=EBigDecimal)?
-		('Operador' Operador=EString)?
 		'operandoEsq' operandoEsq=Expressao
+		OT_COMPARISON
 		'operandoDir' operandoDir=Expressao
-	'}';
+	;
 
 ExpBin returns ExpBin:
-	(Comutativa?='Comutativa')?
-	'ExpBin'
-	'{'
-		('Prioridade' Prioridade=EBigDecimal)?
-		('Operador' Operador=EString)?
-		'operandoDir' operandoDir=Expressao
 		'operandoEsq' operandoEsq=Expressao
-	'}';
+		OT_ARITHMETIC
+		'operandoDir' operandoDir=Expressao
+	;
+	
+//terminal 
+OT_COMPARISON: '<'|'>'|'=<'|'>=' |'==';
+//terminal 
+OT_ARITHMETIC:	'-'|'+'|'*'|'/';
+//terminal 
+OT_ASSIGNMENT:	'->';
+//terminal 
+OT_NEGATE:	'-';
+
+
 
 ExpNeg returns ExpNeg:
 	'ExpNeg'

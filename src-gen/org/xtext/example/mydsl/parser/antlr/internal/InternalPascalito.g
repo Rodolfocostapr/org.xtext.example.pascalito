@@ -209,20 +209,20 @@ ruleExpressao returns [EObject current=null]
 		}
 		    |
 		{
-			newCompositeNode(grammarAccess.getExpressaoAccess().getNumberParserRuleCall_1());
+			newCompositeNode(grammarAccess.getExpressaoAccess().getCallProcParserRuleCall_1());
 		}
-		this_Number_1=ruleNumber
+		this_CallProc_1=ruleCallProc
 		{
-			$current = $this_Number_1.current;
+			$current = $this_CallProc_1.current;
 			afterParserOrEnumRuleCall();
 		}
 		    |
 		{
-			newCompositeNode(grammarAccess.getExpressaoAccess().getExpBinLogicaParserRuleCall_2());
+			newCompositeNode(grammarAccess.getExpressaoAccess().getNumberParserRuleCall_2());
 		}
-		this_ExpBinLogica_2=ruleExpBinLogica
+		this_Number_2=ruleNumber
 		{
-			$current = $this_ExpBinLogica_2.current;
+			$current = $this_Number_2.current;
 			afterParserOrEnumRuleCall();
 		}
 		    |
@@ -697,9 +697,12 @@ ruleAtribuicao returns [EObject current=null]
 				}
 			)
 		)
-		otherlv_1='->'
 		{
-			newLeafNode(otherlv_1, grammarAccess.getAtribuicaoAccess().getHyphenMinusGreaterThanSignKeyword_1());
+			newCompositeNode(grammarAccess.getAtribuicaoAccess().getOT_ASSIGNMENTParserRuleCall_1());
+		}
+		ruleOT_ASSIGNMENT
+		{
+			afterParserOrEnumRuleCall();
 		}
 		(
 			(
@@ -954,6 +957,94 @@ ruleEBigDecimal returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleTok
 	)
 ;
 
+// Entry rule entryRuleCallProc
+entryRuleCallProc returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getCallProcRule()); }
+	iv_ruleCallProc=ruleCallProc
+	{ $current=$iv_ruleCallProc.current; }
+	EOF;
+
+// Rule CallProc
+ruleCallProc returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			(
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getCallProcRule());
+					}
+				}
+				otherlv_0=RULE_ID
+				{
+					newLeafNode(otherlv_0, grammarAccess.getCallProcAccess().getRepresentaProcProcedimentoCrossReference_0_0());
+				}
+			)
+		)
+		(
+			otherlv_1='('
+			{
+				newLeafNode(otherlv_1, grammarAccess.getCallProcAccess().getLeftParenthesisKeyword_1_0());
+			}
+			(
+				(
+					(
+						{
+							newCompositeNode(grammarAccess.getCallProcAccess().getParametroExpressaoParserRuleCall_1_1_0_0());
+						}
+						lv_parametro_2_0=ruleExpressao
+						{
+							if ($current==null) {
+								$current = createModelElementForParent(grammarAccess.getCallProcRule());
+							}
+							add(
+								$current,
+								"parametro",
+								lv_parametro_2_0,
+								"org.xtext.example.mydsl.Pascalito.Expressao");
+							afterParserOrEnumRuleCall();
+						}
+					)
+				)
+				(
+					otherlv_3=','
+					{
+						newLeafNode(otherlv_3, grammarAccess.getCallProcAccess().getCommaKeyword_1_1_1_0());
+					}
+					(
+						(
+							{
+								newCompositeNode(grammarAccess.getCallProcAccess().getParametroExpressaoParserRuleCall_1_1_1_1_0());
+							}
+							lv_parametro_4_0=ruleExpressao
+							{
+								if ($current==null) {
+									$current = createModelElementForParent(grammarAccess.getCallProcRule());
+								}
+								add(
+									$current,
+									"parametro",
+									lv_parametro_4_0,
+									"org.xtext.example.mydsl.Pascalito.Expressao");
+								afterParserOrEnumRuleCall();
+							}
+						)
+					)
+				)*
+			)?
+			otherlv_5=')'
+			{
+				newLeafNode(otherlv_5, grammarAccess.getCallProcAccess().getRightParenthesisKeyword_1_2());
+			}
+		)
+	)
+;
+
 // Entry rule entryRuleCallVariavel
 entryRuleCallVariavel returns [EObject current=null]:
 	{ newCompositeNode(grammarAccess.getCallVariavelRule()); }
@@ -1029,147 +1120,6 @@ ruleNumber returns [EObject current=null]
 	)
 ;
 
-// Entry rule entryRuleExpBinLogica
-entryRuleExpBinLogica returns [EObject current=null]:
-	{ newCompositeNode(grammarAccess.getExpBinLogicaRule()); }
-	iv_ruleExpBinLogica=ruleExpBinLogica
-	{ $current=$iv_ruleExpBinLogica.current; }
-	EOF;
-
-// Rule ExpBinLogica
-ruleExpBinLogica returns [EObject current=null]
-@init {
-	enterRule();
-}
-@after {
-	leaveRule();
-}:
-	(
-		(
-			(
-				lv_Comutativa_0_0='Comutativa'
-				{
-					newLeafNode(lv_Comutativa_0_0, grammarAccess.getExpBinLogicaAccess().getComutativaComutativaKeyword_0_0());
-				}
-				{
-					if ($current==null) {
-						$current = createModelElement(grammarAccess.getExpBinLogicaRule());
-					}
-					setWithLastConsumed($current, "Comutativa", true, "Comutativa");
-				}
-			)
-		)?
-		otherlv_1='ExpBinLogica'
-		{
-			newLeafNode(otherlv_1, grammarAccess.getExpBinLogicaAccess().getExpBinLogicaKeyword_1());
-		}
-		otherlv_2='{'
-		{
-			newLeafNode(otherlv_2, grammarAccess.getExpBinLogicaAccess().getLeftCurlyBracketKeyword_2());
-		}
-		(
-			otherlv_3='Prioridade'
-			{
-				newLeafNode(otherlv_3, grammarAccess.getExpBinLogicaAccess().getPrioridadeKeyword_3_0());
-			}
-			(
-				(
-					{
-						newCompositeNode(grammarAccess.getExpBinLogicaAccess().getPrioridadeEBigDecimalParserRuleCall_3_1_0());
-					}
-					lv_Prioridade_4_0=ruleEBigDecimal
-					{
-						if ($current==null) {
-							$current = createModelElementForParent(grammarAccess.getExpBinLogicaRule());
-						}
-						set(
-							$current,
-							"Prioridade",
-							lv_Prioridade_4_0,
-							"org.xtext.example.mydsl.Pascalito.EBigDecimal");
-						afterParserOrEnumRuleCall();
-					}
-				)
-			)
-		)?
-		(
-			otherlv_5='Operador'
-			{
-				newLeafNode(otherlv_5, grammarAccess.getExpBinLogicaAccess().getOperadorKeyword_4_0());
-			}
-			(
-				(
-					{
-						newCompositeNode(grammarAccess.getExpBinLogicaAccess().getOperadorEStringParserRuleCall_4_1_0());
-					}
-					lv_Operador_6_0=ruleEString
-					{
-						if ($current==null) {
-							$current = createModelElementForParent(grammarAccess.getExpBinLogicaRule());
-						}
-						set(
-							$current,
-							"Operador",
-							lv_Operador_6_0,
-							"org.xtext.example.mydsl.Pascalito.EString");
-						afterParserOrEnumRuleCall();
-					}
-				)
-			)
-		)?
-		otherlv_7='operandoEsq'
-		{
-			newLeafNode(otherlv_7, grammarAccess.getExpBinLogicaAccess().getOperandoEsqKeyword_5());
-		}
-		(
-			(
-				{
-					newCompositeNode(grammarAccess.getExpBinLogicaAccess().getOperandoEsqExpressaoParserRuleCall_6_0());
-				}
-				lv_operandoEsq_8_0=ruleExpressao
-				{
-					if ($current==null) {
-						$current = createModelElementForParent(grammarAccess.getExpBinLogicaRule());
-					}
-					set(
-						$current,
-						"operandoEsq",
-						lv_operandoEsq_8_0,
-						"org.xtext.example.mydsl.Pascalito.Expressao");
-					afterParserOrEnumRuleCall();
-				}
-			)
-		)
-		otherlv_9='operandoDir'
-		{
-			newLeafNode(otherlv_9, grammarAccess.getExpBinLogicaAccess().getOperandoDirKeyword_7());
-		}
-		(
-			(
-				{
-					newCompositeNode(grammarAccess.getExpBinLogicaAccess().getOperandoDirExpressaoParserRuleCall_8_0());
-				}
-				lv_operandoDir_10_0=ruleExpressao
-				{
-					if ($current==null) {
-						$current = createModelElementForParent(grammarAccess.getExpBinLogicaRule());
-					}
-					set(
-						$current,
-						"operandoDir",
-						lv_operandoDir_10_0,
-						"org.xtext.example.mydsl.Pascalito.Expressao");
-					afterParserOrEnumRuleCall();
-				}
-			)
-		)
-		otherlv_11='}'
-		{
-			newLeafNode(otherlv_11, grammarAccess.getExpBinLogicaAccess().getRightCurlyBracketKeyword_9());
-		}
-	)
-;
-
 // Entry rule entryRuleExpBin
 entryRuleExpBin returns [EObject current=null]:
 	{ newCompositeNode(grammarAccess.getExpBinRule()); }
@@ -1186,111 +1136,16 @@ ruleExpBin returns [EObject current=null]
 	leaveRule();
 }:
 	(
-		(
-			(
-				lv_Comutativa_0_0='Comutativa'
-				{
-					newLeafNode(lv_Comutativa_0_0, grammarAccess.getExpBinAccess().getComutativaComutativaKeyword_0_0());
-				}
-				{
-					if ($current==null) {
-						$current = createModelElement(grammarAccess.getExpBinRule());
-					}
-					setWithLastConsumed($current, "Comutativa", true, "Comutativa");
-				}
-			)
-		)?
-		otherlv_1='ExpBin'
+		otherlv_0='operandoEsq'
 		{
-			newLeafNode(otherlv_1, grammarAccess.getExpBinAccess().getExpBinKeyword_1());
-		}
-		otherlv_2='{'
-		{
-			newLeafNode(otherlv_2, grammarAccess.getExpBinAccess().getLeftCurlyBracketKeyword_2());
-		}
-		(
-			otherlv_3='Prioridade'
-			{
-				newLeafNode(otherlv_3, grammarAccess.getExpBinAccess().getPrioridadeKeyword_3_0());
-			}
-			(
-				(
-					{
-						newCompositeNode(grammarAccess.getExpBinAccess().getPrioridadeEBigDecimalParserRuleCall_3_1_0());
-					}
-					lv_Prioridade_4_0=ruleEBigDecimal
-					{
-						if ($current==null) {
-							$current = createModelElementForParent(grammarAccess.getExpBinRule());
-						}
-						set(
-							$current,
-							"Prioridade",
-							lv_Prioridade_4_0,
-							"org.xtext.example.mydsl.Pascalito.EBigDecimal");
-						afterParserOrEnumRuleCall();
-					}
-				)
-			)
-		)?
-		(
-			otherlv_5='Operador'
-			{
-				newLeafNode(otherlv_5, grammarAccess.getExpBinAccess().getOperadorKeyword_4_0());
-			}
-			(
-				(
-					{
-						newCompositeNode(grammarAccess.getExpBinAccess().getOperadorEStringParserRuleCall_4_1_0());
-					}
-					lv_Operador_6_0=ruleEString
-					{
-						if ($current==null) {
-							$current = createModelElementForParent(grammarAccess.getExpBinRule());
-						}
-						set(
-							$current,
-							"Operador",
-							lv_Operador_6_0,
-							"org.xtext.example.mydsl.Pascalito.EString");
-						afterParserOrEnumRuleCall();
-					}
-				)
-			)
-		)?
-		otherlv_7='operandoDir'
-		{
-			newLeafNode(otherlv_7, grammarAccess.getExpBinAccess().getOperandoDirKeyword_5());
+			newLeafNode(otherlv_0, grammarAccess.getExpBinAccess().getOperandoEsqKeyword_0());
 		}
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getExpBinAccess().getOperandoDirExpressaoParserRuleCall_6_0());
+					newCompositeNode(grammarAccess.getExpBinAccess().getOperandoEsqExpressaoParserRuleCall_1_0());
 				}
-				lv_operandoDir_8_0=ruleExpressao
-				{
-					if ($current==null) {
-						$current = createModelElementForParent(grammarAccess.getExpBinRule());
-					}
-					set(
-						$current,
-						"operandoDir",
-						lv_operandoDir_8_0,
-						"org.xtext.example.mydsl.Pascalito.Expressao");
-					afterParserOrEnumRuleCall();
-				}
-			)
-		)
-		otherlv_9='operandoEsq'
-		{
-			newLeafNode(otherlv_9, grammarAccess.getExpBinAccess().getOperandoEsqKeyword_7());
-		}
-		(
-			(
-				{
-					newCompositeNode(grammarAccess.getExpBinAccess().getOperandoEsqExpressaoParserRuleCall_8_0());
-				}
-				lv_operandoEsq_10_0=ruleExpressao
+				lv_operandoEsq_1_0=ruleExpressao
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getExpBinRule());
@@ -1298,17 +1153,107 @@ ruleExpBin returns [EObject current=null]
 					set(
 						$current,
 						"operandoEsq",
-						lv_operandoEsq_10_0,
+						lv_operandoEsq_1_0,
 						"org.xtext.example.mydsl.Pascalito.Expressao");
 					afterParserOrEnumRuleCall();
 				}
 			)
 		)
-		otherlv_11='}'
 		{
-			newLeafNode(otherlv_11, grammarAccess.getExpBinAccess().getRightCurlyBracketKeyword_9());
+			newCompositeNode(grammarAccess.getExpBinAccess().getOT_ARITHMETICParserRuleCall_2());
+		}
+		ruleOT_ARITHMETIC
+		{
+			afterParserOrEnumRuleCall();
+		}
+		otherlv_3='operandoDir'
+		{
+			newLeafNode(otherlv_3, grammarAccess.getExpBinAccess().getOperandoDirKeyword_3());
+		}
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getExpBinAccess().getOperandoDirExpressaoParserRuleCall_4_0());
+				}
+				lv_operandoDir_4_0=ruleExpressao
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getExpBinRule());
+					}
+					set(
+						$current,
+						"operandoDir",
+						lv_operandoDir_4_0,
+						"org.xtext.example.mydsl.Pascalito.Expressao");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)
+	)
+;
+
+// Entry rule entryRuleOT_ARITHMETIC
+entryRuleOT_ARITHMETIC returns [String current=null]:
+	{ newCompositeNode(grammarAccess.getOT_ARITHMETICRule()); }
+	iv_ruleOT_ARITHMETIC=ruleOT_ARITHMETIC
+	{ $current=$iv_ruleOT_ARITHMETIC.current.getText(); }
+	EOF;
+
+// Rule OT_ARITHMETIC
+ruleOT_ARITHMETIC returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		kw='-'
+		{
+			$current.merge(kw);
+			newLeafNode(kw, grammarAccess.getOT_ARITHMETICAccess().getHyphenMinusKeyword_0());
+		}
+		    |
+		kw='+'
+		{
+			$current.merge(kw);
+			newLeafNode(kw, grammarAccess.getOT_ARITHMETICAccess().getPlusSignKeyword_1());
+		}
+		    |
+		kw='*'
+		{
+			$current.merge(kw);
+			newLeafNode(kw, grammarAccess.getOT_ARITHMETICAccess().getAsteriskKeyword_2());
+		}
+		    |
+		kw='/'
+		{
+			$current.merge(kw);
+			newLeafNode(kw, grammarAccess.getOT_ARITHMETICAccess().getSolidusKeyword_3());
 		}
 	)
+;
+
+// Entry rule entryRuleOT_ASSIGNMENT
+entryRuleOT_ASSIGNMENT returns [String current=null]:
+	{ newCompositeNode(grammarAccess.getOT_ASSIGNMENTRule()); }
+	iv_ruleOT_ASSIGNMENT=ruleOT_ASSIGNMENT
+	{ $current=$iv_ruleOT_ASSIGNMENT.current.getText(); }
+	EOF;
+
+// Rule OT_ASSIGNMENT
+ruleOT_ASSIGNMENT returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	kw='->'
+	{
+		$current.merge(kw);
+		newLeafNode(kw, grammarAccess.getOT_ASSIGNMENTAccess().getHyphenMinusGreaterThanSignKeyword());
+	}
 ;
 
 // Entry rule entryRuleExpNeg
