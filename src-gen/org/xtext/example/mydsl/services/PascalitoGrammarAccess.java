@@ -99,18 +99,17 @@ public class PascalitoGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cCallVariavelParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cCallProcParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		private final RuleCall cNumberParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
-		private final RuleCall cExpBinParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
-		private final RuleCall cExpNegParserRuleCall_4 = (RuleCall)cAlternatives.eContents().get(4);
+		private final RuleCall cExpBinLogicaParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
+		private final RuleCall cExpBinParserRuleCall_4 = (RuleCall)cAlternatives.eContents().get(4);
+		private final RuleCall cExpNegParserRuleCall_5 = (RuleCall)cAlternatives.eContents().get(5);
 		
 		//Expressao:
-		//	CallVariavel | CallProc | Number / * | ExpBinLogica * / | ExpBin | ExpNeg;
+		//	CallVariavel | CallProc | Number | ExpBinLogica | ExpBin | ExpNeg;
 		@Override public ParserRule getRule() { return rule; }
 		
-		////POR ENQUANTO
-		//CallVariavel | CallProc | Number / * | ExpBinLogica * / | ExpBin | ExpNeg
+		//CallVariavel | CallProc | Number | ExpBinLogica | ExpBin | ExpNeg
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
-		////POR ENQUANTO
 		//CallVariavel
 		public RuleCall getCallVariavelParserRuleCall_0() { return cCallVariavelParserRuleCall_0; }
 		
@@ -120,11 +119,14 @@ public class PascalitoGrammarAccess extends AbstractGrammarElementFinder {
 		//Number
 		public RuleCall getNumberParserRuleCall_2() { return cNumberParserRuleCall_2; }
 		
+		//ExpBinLogica
+		public RuleCall getExpBinLogicaParserRuleCall_3() { return cExpBinLogicaParserRuleCall_3; }
+		
 		//ExpBin
-		public RuleCall getExpBinParserRuleCall_3() { return cExpBinParserRuleCall_3; }
+		public RuleCall getExpBinParserRuleCall_4() { return cExpBinParserRuleCall_4; }
 		
 		//ExpNeg
-		public RuleCall getExpNegParserRuleCall_4() { return cExpNegParserRuleCall_4; }
+		public RuleCall getExpNegParserRuleCall_5() { return cExpNegParserRuleCall_5; }
 	}
 	public class EStringElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.example.mydsl.Pascalito.EString");
@@ -689,52 +691,191 @@ public class PascalitoGrammarAccess extends AbstractGrammarElementFinder {
 		//EInt
 		public RuleCall getValorEIntParserRuleCall_1_0() { return cValorEIntParserRuleCall_1_0; }
 	}
+	public class ExpBinLogicaElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.example.mydsl.Pascalito.ExpBinLogica");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Assignment cComutativaAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final Keyword cComutativaComutativaKeyword_0_0 = (Keyword)cComutativaAssignment_0.eContents().get(0);
+		private final Keyword cExpBinLogicaKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Keyword cLeftCurlyBracketKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Group cGroup_3 = (Group)cGroup.eContents().get(3);
+		private final Keyword cPrioridadeKeyword_3_0 = (Keyword)cGroup_3.eContents().get(0);
+		private final Assignment cPrioridadeAssignment_3_1 = (Assignment)cGroup_3.eContents().get(1);
+		private final RuleCall cPrioridadeEBigDecimalParserRuleCall_3_1_0 = (RuleCall)cPrioridadeAssignment_3_1.eContents().get(0);
+		private final Group cGroup_4 = (Group)cGroup.eContents().get(4);
+		private final Keyword cOperadorKeyword_4_0 = (Keyword)cGroup_4.eContents().get(0);
+		private final Assignment cOperadorAssignment_4_1 = (Assignment)cGroup_4.eContents().get(1);
+		private final RuleCall cOperadorEStringParserRuleCall_4_1_0 = (RuleCall)cOperadorAssignment_4_1.eContents().get(0);
+		private final Keyword cOperandoEsqKeyword_5 = (Keyword)cGroup.eContents().get(5);
+		private final Assignment cOperandoEsqAssignment_6 = (Assignment)cGroup.eContents().get(6);
+		private final RuleCall cOperandoEsqExpressaoParserRuleCall_6_0 = (RuleCall)cOperandoEsqAssignment_6.eContents().get(0);
+		private final Keyword cOperandoDirKeyword_7 = (Keyword)cGroup.eContents().get(7);
+		private final Assignment cOperandoDirAssignment_8 = (Assignment)cGroup.eContents().get(8);
+		private final RuleCall cOperandoDirExpressaoParserRuleCall_8_0 = (RuleCall)cOperandoDirAssignment_8.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_9 = (Keyword)cGroup.eContents().get(9);
+		
+		//ExpBinLogica:
+		//	Comutativa?='Comutativa'?
+		//	'ExpBinLogica'
+		//	'{' ('Prioridade' Prioridade=EBigDecimal)? ('Operador' Operador=EString)?
+		//	'operandoEsq' operandoEsq=Expressao
+		//	'operandoDir' operandoDir=Expressao
+		//	'}';
+		@Override public ParserRule getRule() { return rule; }
+		
+		//Comutativa?='Comutativa'? 'ExpBinLogica' '{' ('Prioridade' Prioridade=EBigDecimal)? ('Operador' Operador=EString)?
+		//'operandoEsq' operandoEsq=Expressao 'operandoDir' operandoDir=Expressao '}'
+		public Group getGroup() { return cGroup; }
+		
+		//Comutativa?='Comutativa'?
+		public Assignment getComutativaAssignment_0() { return cComutativaAssignment_0; }
+		
+		//'Comutativa'
+		public Keyword getComutativaComutativaKeyword_0_0() { return cComutativaComutativaKeyword_0_0; }
+		
+		//'ExpBinLogica'
+		public Keyword getExpBinLogicaKeyword_1() { return cExpBinLogicaKeyword_1; }
+		
+		//'{'
+		public Keyword getLeftCurlyBracketKeyword_2() { return cLeftCurlyBracketKeyword_2; }
+		
+		//('Prioridade' Prioridade=EBigDecimal)?
+		public Group getGroup_3() { return cGroup_3; }
+		
+		//'Prioridade'
+		public Keyword getPrioridadeKeyword_3_0() { return cPrioridadeKeyword_3_0; }
+		
+		//Prioridade=EBigDecimal
+		public Assignment getPrioridadeAssignment_3_1() { return cPrioridadeAssignment_3_1; }
+		
+		//EBigDecimal
+		public RuleCall getPrioridadeEBigDecimalParserRuleCall_3_1_0() { return cPrioridadeEBigDecimalParserRuleCall_3_1_0; }
+		
+		//('Operador' Operador=EString)?
+		public Group getGroup_4() { return cGroup_4; }
+		
+		//'Operador'
+		public Keyword getOperadorKeyword_4_0() { return cOperadorKeyword_4_0; }
+		
+		//Operador=EString
+		public Assignment getOperadorAssignment_4_1() { return cOperadorAssignment_4_1; }
+		
+		//EString
+		public RuleCall getOperadorEStringParserRuleCall_4_1_0() { return cOperadorEStringParserRuleCall_4_1_0; }
+		
+		//'operandoEsq'
+		public Keyword getOperandoEsqKeyword_5() { return cOperandoEsqKeyword_5; }
+		
+		//operandoEsq=Expressao
+		public Assignment getOperandoEsqAssignment_6() { return cOperandoEsqAssignment_6; }
+		
+		//Expressao
+		public RuleCall getOperandoEsqExpressaoParserRuleCall_6_0() { return cOperandoEsqExpressaoParserRuleCall_6_0; }
+		
+		//'operandoDir'
+		public Keyword getOperandoDirKeyword_7() { return cOperandoDirKeyword_7; }
+		
+		//operandoDir=Expressao
+		public Assignment getOperandoDirAssignment_8() { return cOperandoDirAssignment_8; }
+		
+		//Expressao
+		public RuleCall getOperandoDirExpressaoParserRuleCall_8_0() { return cOperandoDirExpressaoParserRuleCall_8_0; }
+		
+		//'}'
+		public Keyword getRightCurlyBracketKeyword_9() { return cRightCurlyBracketKeyword_9; }
+	}
 	public class ExpBinElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.example.mydsl.Pascalito.ExpBin");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cOperandoEsqKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cOperandoEsqAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cOperandoEsqExpressaoParserRuleCall_1_0 = (RuleCall)cOperandoEsqAssignment_1.eContents().get(0);
-		private final RuleCall cOT_ARITHMETICParserRuleCall_2 = (RuleCall)cGroup.eContents().get(2);
-		private final Keyword cOperandoDirKeyword_3 = (Keyword)cGroup.eContents().get(3);
-		private final Assignment cOperandoDirAssignment_4 = (Assignment)cGroup.eContents().get(4);
-		private final RuleCall cOperandoDirExpressaoParserRuleCall_4_0 = (RuleCall)cOperandoDirAssignment_4.eContents().get(0);
+		private final Assignment cComutativaAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final Keyword cComutativaComutativaKeyword_0_0 = (Keyword)cComutativaAssignment_0.eContents().get(0);
+		private final Keyword cExpBinKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Keyword cLeftCurlyBracketKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Group cGroup_3 = (Group)cGroup.eContents().get(3);
+		private final Keyword cPrioridadeKeyword_3_0 = (Keyword)cGroup_3.eContents().get(0);
+		private final Assignment cPrioridadeAssignment_3_1 = (Assignment)cGroup_3.eContents().get(1);
+		private final RuleCall cPrioridadeEBigDecimalParserRuleCall_3_1_0 = (RuleCall)cPrioridadeAssignment_3_1.eContents().get(0);
+		private final Group cGroup_4 = (Group)cGroup.eContents().get(4);
+		private final Keyword cOperadorKeyword_4_0 = (Keyword)cGroup_4.eContents().get(0);
+		private final Assignment cOperadorAssignment_4_1 = (Assignment)cGroup_4.eContents().get(1);
+		private final RuleCall cOperadorEStringParserRuleCall_4_1_0 = (RuleCall)cOperadorAssignment_4_1.eContents().get(0);
+		private final Keyword cOperandoDirKeyword_5 = (Keyword)cGroup.eContents().get(5);
+		private final Assignment cOperandoDirAssignment_6 = (Assignment)cGroup.eContents().get(6);
+		private final RuleCall cOperandoDirExpressaoParserRuleCall_6_0 = (RuleCall)cOperandoDirAssignment_6.eContents().get(0);
+		private final Keyword cOperandoEsqKeyword_7 = (Keyword)cGroup.eContents().get(7);
+		private final Assignment cOperandoEsqAssignment_8 = (Assignment)cGroup.eContents().get(8);
+		private final RuleCall cOperandoEsqExpressaoParserRuleCall_8_0 = (RuleCall)cOperandoEsqAssignment_8.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_9 = (Keyword)cGroup.eContents().get(9);
 		
-		/// * POR ENQUANTO
-		//ExpBinLogica returns ExpBinLogica:
-		//		'operandoEsq' operandoEsq=Expressao
-		//		OT_COMPARISON
-		//		'operandoDir' operandoDir=Expressao
-		//	;
-		// * / ExpBin:
+		//ExpBin:
+		//	Comutativa?='Comutativa'?
+		//	'ExpBin'
+		//	'{' ('Prioridade' Prioridade=EBigDecimal)? ('Operador' Operador=EString)?
+		//	'operandoDir' operandoDir=Expressao
 		//	'operandoEsq' operandoEsq=Expressao
-		//	OT_ARITHMETIC
-		//	'operandoDir' operandoDir=Expressao;
+		//	'}';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'operandoEsq' operandoEsq=Expressao OT_ARITHMETIC 'operandoDir' operandoDir=Expressao
+		//Comutativa?='Comutativa'? 'ExpBin' '{' ('Prioridade' Prioridade=EBigDecimal)? ('Operador' Operador=EString)?
+		//'operandoDir' operandoDir=Expressao 'operandoEsq' operandoEsq=Expressao '}'
 		public Group getGroup() { return cGroup; }
 		
-		//'operandoEsq'
-		public Keyword getOperandoEsqKeyword_0() { return cOperandoEsqKeyword_0; }
+		//Comutativa?='Comutativa'?
+		public Assignment getComutativaAssignment_0() { return cComutativaAssignment_0; }
 		
-		//operandoEsq=Expressao
-		public Assignment getOperandoEsqAssignment_1() { return cOperandoEsqAssignment_1; }
+		//'Comutativa'
+		public Keyword getComutativaComutativaKeyword_0_0() { return cComutativaComutativaKeyword_0_0; }
 		
-		//Expressao
-		public RuleCall getOperandoEsqExpressaoParserRuleCall_1_0() { return cOperandoEsqExpressaoParserRuleCall_1_0; }
+		//'ExpBin'
+		public Keyword getExpBinKeyword_1() { return cExpBinKeyword_1; }
 		
-		//OT_ARITHMETIC
-		public RuleCall getOT_ARITHMETICParserRuleCall_2() { return cOT_ARITHMETICParserRuleCall_2; }
+		//'{'
+		public Keyword getLeftCurlyBracketKeyword_2() { return cLeftCurlyBracketKeyword_2; }
+		
+		//('Prioridade' Prioridade=EBigDecimal)?
+		public Group getGroup_3() { return cGroup_3; }
+		
+		//'Prioridade'
+		public Keyword getPrioridadeKeyword_3_0() { return cPrioridadeKeyword_3_0; }
+		
+		//Prioridade=EBigDecimal
+		public Assignment getPrioridadeAssignment_3_1() { return cPrioridadeAssignment_3_1; }
+		
+		//EBigDecimal
+		public RuleCall getPrioridadeEBigDecimalParserRuleCall_3_1_0() { return cPrioridadeEBigDecimalParserRuleCall_3_1_0; }
+		
+		//('Operador' Operador=EString)?
+		public Group getGroup_4() { return cGroup_4; }
+		
+		//'Operador'
+		public Keyword getOperadorKeyword_4_0() { return cOperadorKeyword_4_0; }
+		
+		//Operador=EString
+		public Assignment getOperadorAssignment_4_1() { return cOperadorAssignment_4_1; }
+		
+		//EString
+		public RuleCall getOperadorEStringParserRuleCall_4_1_0() { return cOperadorEStringParserRuleCall_4_1_0; }
 		
 		//'operandoDir'
-		public Keyword getOperandoDirKeyword_3() { return cOperandoDirKeyword_3; }
+		public Keyword getOperandoDirKeyword_5() { return cOperandoDirKeyword_5; }
 		
 		//operandoDir=Expressao
-		public Assignment getOperandoDirAssignment_4() { return cOperandoDirAssignment_4; }
+		public Assignment getOperandoDirAssignment_6() { return cOperandoDirAssignment_6; }
 		
 		//Expressao
-		public RuleCall getOperandoDirExpressaoParserRuleCall_4_0() { return cOperandoDirExpressaoParserRuleCall_4_0; }
+		public RuleCall getOperandoDirExpressaoParserRuleCall_6_0() { return cOperandoDirExpressaoParserRuleCall_6_0; }
+		
+		//'operandoEsq'
+		public Keyword getOperandoEsqKeyword_7() { return cOperandoEsqKeyword_7; }
+		
+		//operandoEsq=Expressao
+		public Assignment getOperandoEsqAssignment_8() { return cOperandoEsqAssignment_8; }
+		
+		//Expressao
+		public RuleCall getOperandoEsqExpressaoParserRuleCall_8_0() { return cOperandoEsqExpressaoParserRuleCall_8_0; }
+		
+		//'}'
+		public Keyword getRightCurlyBracketKeyword_9() { return cRightCurlyBracketKeyword_9; }
 	}
 	public class OT_COMPARISONElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.example.mydsl.Pascalito.OT_COMPARISON");
@@ -945,6 +1086,7 @@ public class PascalitoGrammarAccess extends AbstractGrammarElementFinder {
 	private final CallProcElements pCallProc;
 	private final CallVariavelElements pCallVariavel;
 	private final NumberElements pNumber;
+	private final ExpBinLogicaElements pExpBinLogica;
 	private final ExpBinElements pExpBin;
 	private final OT_COMPARISONElements pOT_COMPARISON;
 	private final OT_ARITHMETICElements pOT_ARITHMETIC;
@@ -978,6 +1120,7 @@ public class PascalitoGrammarAccess extends AbstractGrammarElementFinder {
 		this.pCallProc = new CallProcElements();
 		this.pCallVariavel = new CallVariavelElements();
 		this.pNumber = new NumberElements();
+		this.pExpBinLogica = new ExpBinLogicaElements();
 		this.pExpBin = new ExpBinElements();
 		this.pOT_COMPARISON = new OT_COMPARISONElements();
 		this.pOT_ARITHMETIC = new OT_ARITHMETICElements();
@@ -1039,7 +1182,7 @@ public class PascalitoGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//Expressao:
-	//	CallVariavel | CallProc | Number / * | ExpBinLogica * / | ExpBin | ExpNeg;
+	//	CallVariavel | CallProc | Number | ExpBinLogica | ExpBin | ExpNeg;
 	public ExpressaoElements getExpressaoAccess() {
 		return pExpressao;
 	}
@@ -1178,16 +1321,28 @@ public class PascalitoGrammarAccess extends AbstractGrammarElementFinder {
 		return getNumberAccess().getRule();
 	}
 	
-	/// * POR ENQUANTO
-	//ExpBinLogica returns ExpBinLogica:
-	//		'operandoEsq' operandoEsq=Expressao
-	//		OT_COMPARISON
-	//		'operandoDir' operandoDir=Expressao
-	//	;
-	// * / ExpBin:
+	//ExpBinLogica:
+	//	Comutativa?='Comutativa'?
+	//	'ExpBinLogica'
+	//	'{' ('Prioridade' Prioridade=EBigDecimal)? ('Operador' Operador=EString)?
 	//	'operandoEsq' operandoEsq=Expressao
-	//	OT_ARITHMETIC
-	//	'operandoDir' operandoDir=Expressao;
+	//	'operandoDir' operandoDir=Expressao
+	//	'}';
+	public ExpBinLogicaElements getExpBinLogicaAccess() {
+		return pExpBinLogica;
+	}
+	
+	public ParserRule getExpBinLogicaRule() {
+		return getExpBinLogicaAccess().getRule();
+	}
+	
+	//ExpBin:
+	//	Comutativa?='Comutativa'?
+	//	'ExpBin'
+	//	'{' ('Prioridade' Prioridade=EBigDecimal)? ('Operador' Operador=EString)?
+	//	'operandoDir' operandoDir=Expressao
+	//	'operandoEsq' operandoEsq=Expressao
+	//	'}';
 	public ExpBinElements getExpBinAccess() {
 		return pExpBin;
 	}

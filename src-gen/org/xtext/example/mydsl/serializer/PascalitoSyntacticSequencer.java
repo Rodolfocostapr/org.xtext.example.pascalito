@@ -31,20 +31,9 @@ public class PascalitoSyntacticSequencer extends AbstractSyntacticSequencer {
 	
 	@Override
 	protected String getUnassignedRuleCallToken(EObject semanticObject, RuleCall ruleCall, INode node) {
-		if (ruleCall.getRule() == grammarAccess.getOT_ARITHMETICRule())
-			return getOT_ARITHMETICToken(semanticObject, ruleCall, node);
-		else if (ruleCall.getRule() == grammarAccess.getOT_ASSIGNMENTRule())
+		if (ruleCall.getRule() == grammarAccess.getOT_ASSIGNMENTRule())
 			return getOT_ASSIGNMENTToken(semanticObject, ruleCall, node);
 		return "";
-	}
-	
-	/**
-	 * OT_ARITHMETIC:	'-'|'+'|'*'|'/';
-	 */
-	protected String getOT_ARITHMETICToken(EObject semanticObject, RuleCall ruleCall, INode node) {
-		if (node != null)
-			return getTokenText(node);
-		return "-";
 	}
 	
 	/**

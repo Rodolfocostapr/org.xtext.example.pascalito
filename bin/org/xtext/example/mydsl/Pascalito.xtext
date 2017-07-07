@@ -82,16 +82,24 @@ Number returns Number:
 	;
 
 ExpBinLogica returns ExpBinLogica:
+	(Comutativa?='Comutativa')?
+	'ExpBinLogica'
+	'{'
+		('Prioridade' Prioridade=EBigDecimal)?
+		('Operador' Operador=EString)?
 		'operandoEsq' operandoEsq=Expressao
-		OT_COMPARISON
 		'operandoDir' operandoDir=Expressao
-	;
+	'}';
 
 ExpBin returns ExpBin:
-		'operandoEsq' operandoEsq=Expressao
-		OT_ARITHMETIC
+	(Comutativa?='Comutativa')?
+	'ExpBin'
+	'{'
+		('Prioridade' Prioridade=EBigDecimal)?
+		('Operador' Operador=EString)?
 		'operandoDir' operandoDir=Expressao
-	;
+		'operandoEsq' operandoEsq=Expressao
+	'}';
 	
 //terminal 
 OT_COMPARISON: '<'|'>'|'=<'|'>=' |'==';
