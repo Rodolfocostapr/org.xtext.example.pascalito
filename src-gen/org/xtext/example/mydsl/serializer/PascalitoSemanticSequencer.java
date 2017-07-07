@@ -20,11 +20,13 @@ import pascalito.Bloco;
 import pascalito.CallProc;
 import pascalito.CallProcedimento;
 import pascalito.CallVariavel;
+import pascalito.Comutativa;
 import pascalito.Desvio;
-import pascalito.ExpBin;
 import pascalito.ExpBinLogica;
 import pascalito.ExpNeg;
 import pascalito.Loop;
+import pascalito.N_Comutativa;
+import pascalito.NumberLiteral;
 import pascalito.PascalitoPackage;
 import pascalito.Procedimento;
 import pascalito.Programa;
@@ -59,11 +61,11 @@ public class PascalitoSemanticSequencer extends AbstractDelegatingSemanticSequen
 			case PascalitoPackage.CALL_VARIAVEL:
 				sequence_CallVariavel(context, (CallVariavel) semanticObject); 
 				return; 
+			case PascalitoPackage.COMUTATIVA:
+				sequence_Comutativa(context, (Comutativa) semanticObject); 
+				return; 
 			case PascalitoPackage.DESVIO:
 				sequence_Desvio(context, (Desvio) semanticObject); 
-				return; 
-			case PascalitoPackage.EXP_BIN:
-				sequence_ExpBin(context, (ExpBin) semanticObject); 
 				return; 
 			case PascalitoPackage.EXP_BIN_LOGICA:
 				sequence_ExpBinLogica(context, (ExpBinLogica) semanticObject); 
@@ -74,8 +76,11 @@ public class PascalitoSemanticSequencer extends AbstractDelegatingSemanticSequen
 			case PascalitoPackage.LOOP:
 				sequence_Loop(context, (Loop) semanticObject); 
 				return; 
-			case PascalitoPackage.NUMBER:
-				sequence_Number(context, (pascalito.Number) semanticObject); 
+			case PascalitoPackage.NCOMUTATIVA:
+				sequence_N_Comutativa(context, (N_Comutativa) semanticObject); 
+				return; 
+			case PascalitoPackage.NUMBER_LITERAL:
+				sequence_NumberLiteral(context, (NumberLiteral) semanticObject); 
 				return; 
 			case PascalitoPackage.PROCEDIMENTO:
 				sequence_Procedimento(context, (Procedimento) semanticObject); 
@@ -129,6 +134,13 @@ public class PascalitoSemanticSequencer extends AbstractDelegatingSemanticSequen
 	 * Contexts:
 	 *     Expressao returns CallProc
 	 *     CallProc returns CallProc
+	 *     Comutativa returns CallProc
+	 *     Comutativa.Comutativa_1_0 returns CallProc
+	 *     N_Comutativa returns CallProc
+	 *     N_Comutativa.N_Comutativa_1_0 returns CallProc
+	 *     ExpBinLogica returns CallProc
+	 *     ExpBinLogica.ExpBinLogica_1_0 returns CallProc
+	 *     Primary returns CallProc
 	 *
 	 * Constraint:
 	 *     (representaProc=[Procedimento|ID] (parametro+=Expressao parametro+=Expressao*)?)
@@ -155,6 +167,13 @@ public class PascalitoSemanticSequencer extends AbstractDelegatingSemanticSequen
 	 * Contexts:
 	 *     Expressao returns CallVariavel
 	 *     CallVariavel returns CallVariavel
+	 *     Comutativa returns CallVariavel
+	 *     Comutativa.Comutativa_1_0 returns CallVariavel
+	 *     N_Comutativa returns CallVariavel
+	 *     N_Comutativa.N_Comutativa_1_0 returns CallVariavel
+	 *     ExpBinLogica returns CallVariavel
+	 *     ExpBinLogica.ExpBinLogica_1_0 returns CallVariavel
+	 *     Primary returns CallVariavel
 	 *
 	 * Constraint:
 	 *     representa=[Variavel|ID]
@@ -166,6 +185,34 @@ public class PascalitoSemanticSequencer extends AbstractDelegatingSemanticSequen
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getCallVariavelAccess().getRepresentaVariavelIDTerminalRuleCall_0_1(), semanticObject.getRepresenta());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     Expressao returns Comutativa
+	 *     Comutativa returns Comutativa
+	 *     Comutativa.Comutativa_1_0 returns Comutativa
+	 *     N_Comutativa returns Comutativa
+	 *     N_Comutativa.N_Comutativa_1_0 returns Comutativa
+	 *     ExpBinLogica returns Comutativa
+	 *     ExpBinLogica.ExpBinLogica_1_0 returns Comutativa
+	 *     Primary returns Comutativa
+	 *
+	 * Constraint:
+	 *     (left=Comutativa_Comutativa_1_0 right=N_Comutativa)
+	 */
+	protected void sequence_Comutativa(ISerializationContext context, Comutativa semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, PascalitoPackage.Literals.EXPRESSAO__LEFT) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, PascalitoPackage.Literals.EXPRESSAO__LEFT));
+			if (transientValues.isValueTransient(semanticObject, PascalitoPackage.Literals.EXPRESSAO__RIGHT) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, PascalitoPackage.Literals.EXPRESSAO__RIGHT));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getComutativaAccess().getComutativaLeftAction_1_0(), semanticObject.getLeft());
+		feeder.accept(grammarAccess.getComutativaAccess().getRightN_ComutativaParserRuleCall_1_2_0(), semanticObject.getRight());
 		feeder.finish();
 	}
 	
@@ -186,26 +233,28 @@ public class PascalitoSemanticSequencer extends AbstractDelegatingSemanticSequen
 	/**
 	 * Contexts:
 	 *     Expressao returns ExpBinLogica
+	 *     Comutativa returns ExpBinLogica
+	 *     Comutativa.Comutativa_1_0 returns ExpBinLogica
+	 *     N_Comutativa returns ExpBinLogica
+	 *     N_Comutativa.N_Comutativa_1_0 returns ExpBinLogica
 	 *     ExpBinLogica returns ExpBinLogica
+	 *     ExpBinLogica.ExpBinLogica_1_0 returns ExpBinLogica
+	 *     Primary returns ExpBinLogica
 	 *
 	 * Constraint:
-	 *     (Comutativa?='Comutativa'? Prioridade=EBigDecimal? Operador=EString? operandoEsq=Expressao operandoDir=Expressao)
+	 *     (left=ExpBinLogica_ExpBinLogica_1_0 right=Primary)
 	 */
 	protected void sequence_ExpBinLogica(ISerializationContext context, ExpBinLogica semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * Contexts:
-	 *     Expressao returns ExpBin
-	 *     ExpBin returns ExpBin
-	 *
-	 * Constraint:
-	 *     (Comutativa?='Comutativa'? Prioridade=EBigDecimal? Operador=EString? operandoDir=Expressao operandoEsq=Expressao)
-	 */
-	protected void sequence_ExpBin(ISerializationContext context, ExpBin semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, PascalitoPackage.Literals.EXPRESSAO__LEFT) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, PascalitoPackage.Literals.EXPRESSAO__LEFT));
+			if (transientValues.isValueTransient(semanticObject, PascalitoPackage.Literals.EXPRESSAO__RIGHT) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, PascalitoPackage.Literals.EXPRESSAO__RIGHT));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getExpBinLogicaAccess().getExpBinLogicaLeftAction_1_0(), semanticObject.getLeft());
+		feeder.accept(grammarAccess.getExpBinLogicaAccess().getRightPrimaryParserRuleCall_1_2_0(), semanticObject.getRight());
+		feeder.finish();
 	}
 	
 	
@@ -215,10 +264,16 @@ public class PascalitoSemanticSequencer extends AbstractDelegatingSemanticSequen
 	 *     ExpNeg returns ExpNeg
 	 *
 	 * Constraint:
-	 *     (Prioridade=EBigDecimal? Operador=EString? nega=Expressao)
+	 *     nega=Expressao
 	 */
 	protected void sequence_ExpNeg(ISerializationContext context, ExpNeg semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, PascalitoPackage.Literals.EXP_NEG__NEGA) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, PascalitoPackage.Literals.EXP_NEG__NEGA));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getExpNegAccess().getNegaExpressaoParserRuleCall_1_0(), semanticObject.getNega());
+		feeder.finish();
 	}
 	
 	
@@ -237,20 +292,49 @@ public class PascalitoSemanticSequencer extends AbstractDelegatingSemanticSequen
 	
 	/**
 	 * Contexts:
-	 *     Expressao returns Number
-	 *     Number returns Number
+	 *     Expressao returns N_Comutativa
+	 *     Comutativa returns N_Comutativa
+	 *     Comutativa.Comutativa_1_0 returns N_Comutativa
+	 *     N_Comutativa returns N_Comutativa
+	 *     N_Comutativa.N_Comutativa_1_0 returns N_Comutativa
+	 *     ExpBinLogica returns N_Comutativa
+	 *     ExpBinLogica.ExpBinLogica_1_0 returns N_Comutativa
+	 *     Primary returns N_Comutativa
 	 *
 	 * Constraint:
-	 *     Valor=EInt
+	 *     (left=N_Comutativa_N_Comutativa_1_0 right=ExpBinLogica)
 	 */
-	protected void sequence_Number(ISerializationContext context, pascalito.Number semanticObject) {
+	protected void sequence_N_Comutativa(ISerializationContext context, N_Comutativa semanticObject) {
 		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, PascalitoPackage.Literals.NUMBER__VALOR) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, PascalitoPackage.Literals.NUMBER__VALOR));
+			if (transientValues.isValueTransient(semanticObject, PascalitoPackage.Literals.EXPRESSAO__LEFT) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, PascalitoPackage.Literals.EXPRESSAO__LEFT));
+			if (transientValues.isValueTransient(semanticObject, PascalitoPackage.Literals.EXPRESSAO__RIGHT) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, PascalitoPackage.Literals.EXPRESSAO__RIGHT));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getNumberAccess().getValorEIntParserRuleCall_1_0(), semanticObject.getValor());
+		feeder.accept(grammarAccess.getN_ComutativaAccess().getN_ComutativaLeftAction_1_0(), semanticObject.getLeft());
+		feeder.accept(grammarAccess.getN_ComutativaAccess().getRightExpBinLogicaParserRuleCall_1_2_0(), semanticObject.getRight());
 		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     Expressao returns NumberLiteral
+	 *     Comutativa returns NumberLiteral
+	 *     Comutativa.Comutativa_1_0 returns NumberLiteral
+	 *     N_Comutativa returns NumberLiteral
+	 *     N_Comutativa.N_Comutativa_1_0 returns NumberLiteral
+	 *     ExpBinLogica returns NumberLiteral
+	 *     ExpBinLogica.ExpBinLogica_1_0 returns NumberLiteral
+	 *     Primary returns NumberLiteral
+	 *     NumberLiteral returns NumberLiteral
+	 *
+	 * Constraint:
+	 *     {NumberLiteral}
+	 */
+	protected void sequence_NumberLiteral(ISerializationContext context, NumberLiteral semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	

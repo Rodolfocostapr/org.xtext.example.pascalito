@@ -22,27 +22,88 @@ public class PascalitoSyntacticSequencer extends AbstractSyntacticSequencer {
 
 	protected PascalitoGrammarAccess grammarAccess;
 	protected AbstractElementAlias match_Desvio___ElseKeyword_7_0_LeftCurlyBracketKeyword_7_1_RightCurlyBracketKeyword_7_3__q;
+	protected AbstractElementAlias match_Primary_LeftParenthesisKeyword_3_0_a;
+	protected AbstractElementAlias match_Primary_LeftParenthesisKeyword_3_0_p;
 	
 	@Inject
 	protected void init(IGrammarAccess access) {
 		grammarAccess = (PascalitoGrammarAccess) access;
 		match_Desvio___ElseKeyword_7_0_LeftCurlyBracketKeyword_7_1_RightCurlyBracketKeyword_7_3__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getDesvioAccess().getElseKeyword_7_0()), new TokenAlias(false, false, grammarAccess.getDesvioAccess().getLeftCurlyBracketKeyword_7_1()), new TokenAlias(false, false, grammarAccess.getDesvioAccess().getRightCurlyBracketKeyword_7_3()));
+		match_Primary_LeftParenthesisKeyword_3_0_a = new TokenAlias(true, true, grammarAccess.getPrimaryAccess().getLeftParenthesisKeyword_3_0());
+		match_Primary_LeftParenthesisKeyword_3_0_p = new TokenAlias(true, false, grammarAccess.getPrimaryAccess().getLeftParenthesisKeyword_3_0());
 	}
 	
 	@Override
 	protected String getUnassignedRuleCallToken(EObject semanticObject, RuleCall ruleCall, INode node) {
-		if (ruleCall.getRule() == grammarAccess.getOT_ASSIGNMENTRule())
-			return getOT_ASSIGNMENTToken(semanticObject, ruleCall, node);
+		if (ruleCall.getRule() == grammarAccess.getEBigDecimalRule())
+			return getEBigDecimalToken(semanticObject, ruleCall, node);
+		else if (ruleCall.getRule() == grammarAccess.getOP_ARIT_PRIO_0Rule())
+			return getOP_ARIT_PRIO_0Token(semanticObject, ruleCall, node);
+		else if (ruleCall.getRule() == grammarAccess.getOP_ARIT_PRIO_1Rule())
+			return getOP_ARIT_PRIO_1Token(semanticObject, ruleCall, node);
+		else if (ruleCall.getRule() == grammarAccess.getOP_ASSIGNMENTRule())
+			return getOP_ASSIGNMENTToken(semanticObject, ruleCall, node);
+		else if (ruleCall.getRule() == grammarAccess.getOP_COMPARISONRule())
+			return getOP_COMPARISONToken(semanticObject, ruleCall, node);
+		else if (ruleCall.getRule() == grammarAccess.getOP_NEGATERule())
+			return getOP_NEGATEToken(semanticObject, ruleCall, node);
 		return "";
 	}
 	
 	/**
-	 * OT_ASSIGNMENT:	'->';
+	 * EBigDecimal returns ecore::EBigDecimal:
+	 * 	INT |
+	 * 	INT '.' INT;
 	 */
-	protected String getOT_ASSIGNMENTToken(EObject semanticObject, RuleCall ruleCall, INode node) {
+	protected String getEBigDecimalToken(EObject semanticObject, RuleCall ruleCall, INode node) {
+		if (node != null)
+			return getTokenText(node);
+		return "";
+	}
+	
+	/**
+	 * OP_ARIT_PRIO_0:	'-'|'+';
+	 */
+	protected String getOP_ARIT_PRIO_0Token(EObject semanticObject, RuleCall ruleCall, INode node) {
+		if (node != null)
+			return getTokenText(node);
+		return "-";
+	}
+	
+	/**
+	 * OP_ARIT_PRIO_1: '*'|'/';
+	 */
+	protected String getOP_ARIT_PRIO_1Token(EObject semanticObject, RuleCall ruleCall, INode node) {
+		if (node != null)
+			return getTokenText(node);
+		return "*";
+	}
+	
+	/**
+	 * OP_ASSIGNMENT:	'->';
+	 */
+	protected String getOP_ASSIGNMENTToken(EObject semanticObject, RuleCall ruleCall, INode node) {
 		if (node != null)
 			return getTokenText(node);
 		return "->";
+	}
+	
+	/**
+	 * OP_COMPARISON: '<'|'>'|'=<'|'>=' |'==' | 'AND' | 'OR' | 'XOR';
+	 */
+	protected String getOP_COMPARISONToken(EObject semanticObject, RuleCall ruleCall, INode node) {
+		if (node != null)
+			return getTokenText(node);
+		return "<";
+	}
+	
+	/**
+	 * OP_NEGATE:	'-';
+	 */
+	protected String getOP_NEGATEToken(EObject semanticObject, RuleCall ruleCall, INode node) {
+		if (node != null)
+			return getTokenText(node);
+		return "-";
 	}
 	
 	@Override
@@ -53,6 +114,10 @@ public class PascalitoSyntacticSequencer extends AbstractSyntacticSequencer {
 			List<INode> syntaxNodes = getNodesFor(transitionNodes, syntax);
 			if (match_Desvio___ElseKeyword_7_0_LeftCurlyBracketKeyword_7_1_RightCurlyBracketKeyword_7_3__q.equals(syntax))
 				emit_Desvio___ElseKeyword_7_0_LeftCurlyBracketKeyword_7_1_RightCurlyBracketKeyword_7_3__q(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if (match_Primary_LeftParenthesisKeyword_3_0_a.equals(syntax))
+				emit_Primary_LeftParenthesisKeyword_3_0_a(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if (match_Primary_LeftParenthesisKeyword_3_0_p.equals(syntax))
+				emit_Primary_LeftParenthesisKeyword_3_0_p(semanticObject, getLastNavigableState(), syntaxNodes);
 			else acceptNodes(getLastNavigableState(), syntaxNodes);
 		}
 	}
@@ -66,6 +131,35 @@ public class PascalitoSyntacticSequencer extends AbstractSyntacticSequencer {
 	 *     se=Expressao ')' '{' '}' (ambiguity) (rule end)
 	 */
 	protected void emit_Desvio___ElseKeyword_7_0_LeftCurlyBracketKeyword_7_1_RightCurlyBracketKeyword_7_3__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+		acceptNodes(transition, nodes);
+	}
+	
+	/**
+	 * Ambiguous syntax:
+	 *     '('*
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     (rule start) (ambiguity) EBigDecimal (rule start)
+	 *     (rule start) (ambiguity) representa=[Variavel|ID]
+	 *     (rule start) (ambiguity) representaProc=[Procedimento|ID]
+	 *     (rule start) (ambiguity) {Comutativa.left=}
+	 *     (rule start) (ambiguity) {ExpBinLogica.left=}
+	 *     (rule start) (ambiguity) {N_Comutativa.left=}
+	 */
+	protected void emit_Primary_LeftParenthesisKeyword_3_0_a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+		acceptNodes(transition, nodes);
+	}
+	
+	/**
+	 * Ambiguous syntax:
+	 *     '('+
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     (rule start) (ambiguity) {Comutativa.left=}
+	 *     (rule start) (ambiguity) {ExpBinLogica.left=}
+	 *     (rule start) (ambiguity) {N_Comutativa.left=}
+	 */
+	protected void emit_Primary_LeftParenthesisKeyword_3_0_p(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
