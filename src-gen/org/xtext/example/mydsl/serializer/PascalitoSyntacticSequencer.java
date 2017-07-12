@@ -21,14 +21,14 @@ import org.xtext.example.mydsl.services.PascalitoGrammarAccess;
 public class PascalitoSyntacticSequencer extends AbstractSyntacticSequencer {
 
 	protected PascalitoGrammarAccess grammarAccess;
-	protected AbstractElementAlias match_Desvio___ElseKeyword_7_0_LeftCurlyBracketKeyword_7_1_RightCurlyBracketKeyword_7_3__q;
+	protected AbstractElementAlias match_If___ElseKeyword_7_0_LeftCurlyBracketKeyword_7_1_RightCurlyBracketKeyword_7_3__q;
 	protected AbstractElementAlias match_Primary_LeftParenthesisKeyword_3_0_a;
 	protected AbstractElementAlias match_Primary_LeftParenthesisKeyword_3_0_p;
 	
 	@Inject
 	protected void init(IGrammarAccess access) {
 		grammarAccess = (PascalitoGrammarAccess) access;
-		match_Desvio___ElseKeyword_7_0_LeftCurlyBracketKeyword_7_1_RightCurlyBracketKeyword_7_3__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getDesvioAccess().getElseKeyword_7_0()), new TokenAlias(false, false, grammarAccess.getDesvioAccess().getLeftCurlyBracketKeyword_7_1()), new TokenAlias(false, false, grammarAccess.getDesvioAccess().getRightCurlyBracketKeyword_7_3()));
+		match_If___ElseKeyword_7_0_LeftCurlyBracketKeyword_7_1_RightCurlyBracketKeyword_7_3__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getIfAccess().getElseKeyword_7_0()), new TokenAlias(false, false, grammarAccess.getIfAccess().getLeftCurlyBracketKeyword_7_1()), new TokenAlias(false, false, grammarAccess.getIfAccess().getRightCurlyBracketKeyword_7_3()));
 		match_Primary_LeftParenthesisKeyword_3_0_a = new TokenAlias(true, true, grammarAccess.getPrimaryAccess().getLeftParenthesisKeyword_3_0());
 		match_Primary_LeftParenthesisKeyword_3_0_p = new TokenAlias(true, false, grammarAccess.getPrimaryAccess().getLeftParenthesisKeyword_3_0());
 	}
@@ -112,8 +112,8 @@ public class PascalitoSyntacticSequencer extends AbstractSyntacticSequencer {
 		List<INode> transitionNodes = collectNodes(fromNode, toNode);
 		for (AbstractElementAlias syntax : transition.getAmbiguousSyntaxes()) {
 			List<INode> syntaxNodes = getNodesFor(transitionNodes, syntax);
-			if (match_Desvio___ElseKeyword_7_0_LeftCurlyBracketKeyword_7_1_RightCurlyBracketKeyword_7_3__q.equals(syntax))
-				emit_Desvio___ElseKeyword_7_0_LeftCurlyBracketKeyword_7_1_RightCurlyBracketKeyword_7_3__q(semanticObject, getLastNavigableState(), syntaxNodes);
+			if (match_If___ElseKeyword_7_0_LeftCurlyBracketKeyword_7_1_RightCurlyBracketKeyword_7_3__q.equals(syntax))
+				emit_If___ElseKeyword_7_0_LeftCurlyBracketKeyword_7_1_RightCurlyBracketKeyword_7_3__q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if (match_Primary_LeftParenthesisKeyword_3_0_a.equals(syntax))
 				emit_Primary_LeftParenthesisKeyword_3_0_a(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if (match_Primary_LeftParenthesisKeyword_3_0_p.equals(syntax))
@@ -127,10 +127,10 @@ public class PascalitoSyntacticSequencer extends AbstractSyntacticSequencer {
 	 *     ('else' '{' '}')?
 	 *
 	 * This ambiguous syntax occurs at:
-	 *     faca+=Comando '}' (ambiguity) (rule end)
-	 *     se=Expressao ')' '{' '}' (ambiguity) (rule end)
+	 *     do+=Command '}' (ambiguity) (rule end)
+	 *     ifExp=Expression ')' '{' '}' (ambiguity) (rule end)
 	 */
-	protected void emit_Desvio___ElseKeyword_7_0_LeftCurlyBracketKeyword_7_1_RightCurlyBracketKeyword_7_3__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+	protected void emit_If___ElseKeyword_7_0_LeftCurlyBracketKeyword_7_1_RightCurlyBracketKeyword_7_3__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
@@ -140,11 +140,11 @@ public class PascalitoSyntacticSequencer extends AbstractSyntacticSequencer {
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     (rule start) (ambiguity) EBigDecimal (rule start)
-	 *     (rule start) (ambiguity) representa=[Variavel|ID]
-	 *     (rule start) (ambiguity) representaProc=[Procedimento|ID]
-	 *     (rule start) (ambiguity) {Comutativa.left=}
-	 *     (rule start) (ambiguity) {ExpBinLogica.left=}
-	 *     (rule start) (ambiguity) {N_Comutativa.left=}
+	 *     (rule start) (ambiguity) represent=[Procedure|ID]
+	 *     (rule start) (ambiguity) represent=[Variable|ID]
+	 *     (rule start) (ambiguity) {ExpBinLogical.left=}
+	 *     (rule start) (ambiguity) {ExpBinNv0.left=}
+	 *     (rule start) (ambiguity) {ExpBinNv1.left=}
 	 */
 	protected void emit_Primary_LeftParenthesisKeyword_3_0_a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
@@ -155,9 +155,9 @@ public class PascalitoSyntacticSequencer extends AbstractSyntacticSequencer {
 	 *     '('+
 	 *
 	 * This ambiguous syntax occurs at:
-	 *     (rule start) (ambiguity) {Comutativa.left=}
-	 *     (rule start) (ambiguity) {ExpBinLogica.left=}
-	 *     (rule start) (ambiguity) {N_Comutativa.left=}
+	 *     (rule start) (ambiguity) {ExpBinLogical.left=}
+	 *     (rule start) (ambiguity) {ExpBinNv0.left=}
+	 *     (rule start) (ambiguity) {ExpBinNv1.left=}
 	 */
 	protected void emit_Primary_LeftParenthesisKeyword_3_0_p(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);

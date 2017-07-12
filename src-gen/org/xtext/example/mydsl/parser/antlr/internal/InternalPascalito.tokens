@@ -18,11 +18,11 @@
 'OR'=32
 'XOR'=33
 'else'=23
-'fim'=19
+'end'=19
 'if'=22
-'inicio'=18
-'procedimento'=17
-'programa'=11
+'procedure'=17
+'program'=11
+'start'=18
 'var'=14
 '{'=12
 '}'=13

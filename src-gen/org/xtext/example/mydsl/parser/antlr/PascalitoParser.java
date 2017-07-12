@@ -27,7 +27,7 @@ public class PascalitoParser extends AbstractAntlrParser {
 
 	@Override 
 	protected String getDefaultRuleName() {
-		return "Programa";
+		return "Program";
 	}
 
 	public PascalitoGrammarAccess getGrammarAccess() {

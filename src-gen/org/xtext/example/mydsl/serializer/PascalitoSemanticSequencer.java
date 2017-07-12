@@ -15,22 +15,22 @@ import org.eclipse.xtext.serializer.acceptor.SequenceFeeder;
 import org.eclipse.xtext.serializer.sequencer.AbstractDelegatingSemanticSequencer;
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransient;
 import org.xtext.example.mydsl.services.PascalitoGrammarAccess;
-import pascalito.Atribuicao;
-import pascalito.Bloco;
+import pascalito.Atribuition;
+import pascalito.Block;
 import pascalito.CallProc;
-import pascalito.CallProcedimento;
-import pascalito.CallVariavel;
-import pascalito.Comutativa;
-import pascalito.Desvio;
-import pascalito.ExpBinLogica;
+import pascalito.CallProcExp;
+import pascalito.CallVariable;
+import pascalito.ExpBinLogical;
+import pascalito.ExpBinNv0;
+import pascalito.ExpBinNv1;
 import pascalito.ExpNeg;
+import pascalito.If;
 import pascalito.Loop;
-import pascalito.N_Comutativa;
 import pascalito.NumberLiteral;
 import pascalito.PascalitoPackage;
-import pascalito.Procedimento;
-import pascalito.Programa;
-import pascalito.Variavel;
+import pascalito.Procedure;
+import pascalito.Program;
+import pascalito.Variable;
 
 @SuppressWarnings("all")
 public class PascalitoSemanticSequencer extends AbstractDelegatingSemanticSequencer {
@@ -46,50 +46,50 @@ public class PascalitoSemanticSequencer extends AbstractDelegatingSemanticSequen
 		Set<Parameter> parameters = context.getEnabledBooleanParameters();
 		if (epackage == PascalitoPackage.eINSTANCE)
 			switch (semanticObject.eClass().getClassifierID()) {
-			case PascalitoPackage.ATRIBUICAO:
-				sequence_Atribuicao(context, (Atribuicao) semanticObject); 
+			case PascalitoPackage.ATRIBUITION:
+				sequence_Atribuition(context, (Atribuition) semanticObject); 
 				return; 
-			case PascalitoPackage.BLOCO:
-				sequence_Bloco(context, (Bloco) semanticObject); 
+			case PascalitoPackage.BLOCK:
+				sequence_Block(context, (Block) semanticObject); 
 				return; 
 			case PascalitoPackage.CALL_PROC:
 				sequence_CallProc(context, (CallProc) semanticObject); 
 				return; 
-			case PascalitoPackage.CALL_PROCEDIMENTO:
-				sequence_CallProcedimento(context, (CallProcedimento) semanticObject); 
+			case PascalitoPackage.CALL_PROC_EXP:
+				sequence_CallProcExp(context, (CallProcExp) semanticObject); 
 				return; 
-			case PascalitoPackage.CALL_VARIAVEL:
-				sequence_CallVariavel(context, (CallVariavel) semanticObject); 
+			case PascalitoPackage.CALL_VARIABLE:
+				sequence_CallVariable(context, (CallVariable) semanticObject); 
 				return; 
-			case PascalitoPackage.COMUTATIVA:
-				sequence_Comutativa(context, (Comutativa) semanticObject); 
+			case PascalitoPackage.EXP_BIN_LOGICAL:
+				sequence_ExpBinLogical(context, (ExpBinLogical) semanticObject); 
 				return; 
-			case PascalitoPackage.DESVIO:
-				sequence_Desvio(context, (Desvio) semanticObject); 
+			case PascalitoPackage.EXP_BIN_NV0:
+				sequence_ExpBinNv0(context, (ExpBinNv0) semanticObject); 
 				return; 
-			case PascalitoPackage.EXP_BIN_LOGICA:
-				sequence_ExpBinLogica(context, (ExpBinLogica) semanticObject); 
+			case PascalitoPackage.EXP_BIN_NV1:
+				sequence_ExpBinNv1(context, (ExpBinNv1) semanticObject); 
 				return; 
 			case PascalitoPackage.EXP_NEG:
 				sequence_ExpNeg(context, (ExpNeg) semanticObject); 
 				return; 
+			case PascalitoPackage.IF:
+				sequence_If(context, (If) semanticObject); 
+				return; 
 			case PascalitoPackage.LOOP:
 				sequence_Loop(context, (Loop) semanticObject); 
-				return; 
-			case PascalitoPackage.NCOMUTATIVA:
-				sequence_N_Comutativa(context, (N_Comutativa) semanticObject); 
 				return; 
 			case PascalitoPackage.NUMBER_LITERAL:
 				sequence_NumberLiteral(context, (NumberLiteral) semanticObject); 
 				return; 
-			case PascalitoPackage.PROCEDIMENTO:
-				sequence_Procedimento(context, (Procedimento) semanticObject); 
+			case PascalitoPackage.PROCEDURE:
+				sequence_Procedure(context, (Procedure) semanticObject); 
 				return; 
-			case PascalitoPackage.PROGRAMA:
-				sequence_Programa(context, (Programa) semanticObject); 
+			case PascalitoPackage.PROGRAM:
+				sequence_Program(context, (Program) semanticObject); 
 				return; 
-			case PascalitoPackage.VARIAVEL:
-				sequence_Variavel(context, (Variavel) semanticObject); 
+			case PascalitoPackage.VARIABLE:
+				sequence_Variable(context, (Variable) semanticObject); 
 				return; 
 			}
 		if (errorAcceptor != null)
@@ -98,52 +98,65 @@ public class PascalitoSemanticSequencer extends AbstractDelegatingSemanticSequen
 	
 	/**
 	 * Contexts:
-	 *     Comando returns Atribuicao
-	 *     Atribuicao returns Atribuicao
+	 *     Command returns Atribuition
+	 *     Atribuition returns Atribuition
 	 *
 	 * Constraint:
-	 *     (atribui=[Variavel|ID] atribuiResultado=Expressao)
+	 *     (sets=[Variable|ID] atribuiResultado=Expression)
 	 */
-	protected void sequence_Atribuicao(ISerializationContext context, Atribuicao semanticObject) {
+	protected void sequence_Atribuition(ISerializationContext context, Atribuition semanticObject) {
 		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, PascalitoPackage.Literals.ATRIBUICAO__ATRIBUI) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, PascalitoPackage.Literals.ATRIBUICAO__ATRIBUI));
-			if (transientValues.isValueTransient(semanticObject, PascalitoPackage.Literals.ATRIBUICAO__ATRIBUI_RESULTADO) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, PascalitoPackage.Literals.ATRIBUICAO__ATRIBUI_RESULTADO));
+			if (transientValues.isValueTransient(semanticObject, PascalitoPackage.Literals.ATRIBUITION__SETS) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, PascalitoPackage.Literals.ATRIBUITION__SETS));
+			if (transientValues.isValueTransient(semanticObject, PascalitoPackage.Literals.ATRIBUITION__ATRIBUI_RESULTADO) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, PascalitoPackage.Literals.ATRIBUITION__ATRIBUI_RESULTADO));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getAtribuicaoAccess().getAtribuiVariavelIDTerminalRuleCall_0_0_1(), semanticObject.getAtribui());
-		feeder.accept(grammarAccess.getAtribuicaoAccess().getAtribuiResultadoExpressaoParserRuleCall_2_0(), semanticObject.getAtribuiResultado());
+		feeder.accept(grammarAccess.getAtribuitionAccess().getSetsVariableIDTerminalRuleCall_0_0_1(), semanticObject.getSets());
+		feeder.accept(grammarAccess.getAtribuitionAccess().getAtribuiResultadoExpressionParserRuleCall_2_0(), semanticObject.getAtribuiResultado());
 		feeder.finish();
 	}
 	
 	
 	/**
 	 * Contexts:
-	 *     Bloco returns Bloco
+	 *     Block returns Block
 	 *
 	 * Constraint:
-	 *     ((defvariavel+=Variavel defvariavel+=Variavel*)* defprocedimento+=Procedimento* executa+=Comando*)
+	 *     ((defVariable+=Variable defVariable+=Variable*)* defprocedure+=Procedure* execute+=Command*)
 	 */
-	protected void sequence_Bloco(ISerializationContext context, Bloco semanticObject) {
+	protected void sequence_Block(ISerializationContext context, Block semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
 	/**
 	 * Contexts:
-	 *     Expressao returns CallProc
-	 *     CallProc returns CallProc
-	 *     Comutativa returns CallProc
-	 *     Comutativa.Comutativa_1_0 returns CallProc
-	 *     N_Comutativa returns CallProc
-	 *     N_Comutativa.N_Comutativa_1_0 returns CallProc
-	 *     ExpBinLogica returns CallProc
-	 *     ExpBinLogica.ExpBinLogica_1_0 returns CallProc
-	 *     Primary returns CallProc
+	 *     Expression returns CallProcExp
+	 *     CallProcExp returns CallProcExp
+	 *     ExpBinNv0 returns CallProcExp
+	 *     ExpBinNv0.ExpBinNv0_1_0 returns CallProcExp
+	 *     ExpBinNv1 returns CallProcExp
+	 *     ExpBinNv1.ExpBinNv1_1_0 returns CallProcExp
+	 *     ExpBinLogical returns CallProcExp
+	 *     ExpBinLogical.ExpBinLogical_1_0 returns CallProcExp
+	 *     Primary returns CallProcExp
 	 *
 	 * Constraint:
-	 *     (representaProc=[Procedimento|ID] (parametro+=Expressao parametro+=Expressao*)?)
+	 *     (represent=[Procedure|ID] (parameter+=Expression parameter+=Expression*)?)
+	 */
+	protected void sequence_CallProcExp(ISerializationContext context, CallProcExp semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     Command returns CallProc
+	 *     CallProc returns CallProc
+	 *
+	 * Constraint:
+	 *     (defined=[Procedure|ID] (parameter+=Expression parameter+=Expression*)?)
 	 */
 	protected void sequence_CallProc(ISerializationContext context, CallProc semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -152,138 +165,153 @@ public class PascalitoSemanticSequencer extends AbstractDelegatingSemanticSequen
 	
 	/**
 	 * Contexts:
-	 *     Comando returns CallProcedimento
-	 *     CallProcedimento returns CallProcedimento
+	 *     Expression returns CallVariable
+	 *     CallVariable returns CallVariable
+	 *     ExpBinNv0 returns CallVariable
+	 *     ExpBinNv0.ExpBinNv0_1_0 returns CallVariable
+	 *     ExpBinNv1 returns CallVariable
+	 *     ExpBinNv1.ExpBinNv1_1_0 returns CallVariable
+	 *     ExpBinLogical returns CallVariable
+	 *     ExpBinLogical.ExpBinLogical_1_0 returns CallVariable
+	 *     Primary returns CallVariable
 	 *
 	 * Constraint:
-	 *     (definido=[Procedimento|ID] (parametro+=Expressao parametro+=Expressao*)?)
+	 *     represent=[Variable|ID]
 	 */
-	protected void sequence_CallProcedimento(ISerializationContext context, CallProcedimento semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * Contexts:
-	 *     Expressao returns CallVariavel
-	 *     CallVariavel returns CallVariavel
-	 *     Comutativa returns CallVariavel
-	 *     Comutativa.Comutativa_1_0 returns CallVariavel
-	 *     N_Comutativa returns CallVariavel
-	 *     N_Comutativa.N_Comutativa_1_0 returns CallVariavel
-	 *     ExpBinLogica returns CallVariavel
-	 *     ExpBinLogica.ExpBinLogica_1_0 returns CallVariavel
-	 *     Primary returns CallVariavel
-	 *
-	 * Constraint:
-	 *     representa=[Variavel|ID]
-	 */
-	protected void sequence_CallVariavel(ISerializationContext context, CallVariavel semanticObject) {
+	protected void sequence_CallVariable(ISerializationContext context, CallVariable semanticObject) {
 		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, PascalitoPackage.Literals.CALL_VARIAVEL__REPRESENTA) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, PascalitoPackage.Literals.CALL_VARIAVEL__REPRESENTA));
+			if (transientValues.isValueTransient(semanticObject, PascalitoPackage.Literals.CALL_VARIABLE__REPRESENT) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, PascalitoPackage.Literals.CALL_VARIABLE__REPRESENT));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getCallVariavelAccess().getRepresentaVariavelIDTerminalRuleCall_0_1(), semanticObject.getRepresenta());
+		feeder.accept(grammarAccess.getCallVariableAccess().getRepresentVariableIDTerminalRuleCall_0_1(), semanticObject.getRepresent());
 		feeder.finish();
 	}
 	
 	
 	/**
 	 * Contexts:
-	 *     Expressao returns Comutativa
-	 *     Comutativa returns Comutativa
-	 *     Comutativa.Comutativa_1_0 returns Comutativa
-	 *     N_Comutativa returns Comutativa
-	 *     N_Comutativa.N_Comutativa_1_0 returns Comutativa
-	 *     ExpBinLogica returns Comutativa
-	 *     ExpBinLogica.ExpBinLogica_1_0 returns Comutativa
-	 *     Primary returns Comutativa
+	 *     Expression returns ExpBinLogical
+	 *     ExpBinNv0 returns ExpBinLogical
+	 *     ExpBinNv0.ExpBinNv0_1_0 returns ExpBinLogical
+	 *     ExpBinNv1 returns ExpBinLogical
+	 *     ExpBinNv1.ExpBinNv1_1_0 returns ExpBinLogical
+	 *     ExpBinLogical returns ExpBinLogical
+	 *     ExpBinLogical.ExpBinLogical_1_0 returns ExpBinLogical
+	 *     Primary returns ExpBinLogical
 	 *
 	 * Constraint:
-	 *     (left=Comutativa_Comutativa_1_0 right=N_Comutativa)
+	 *     (left=ExpBinLogical_ExpBinLogical_1_0 right=Primary)
 	 */
-	protected void sequence_Comutativa(ISerializationContext context, Comutativa semanticObject) {
+	protected void sequence_ExpBinLogical(ISerializationContext context, ExpBinLogical semanticObject) {
 		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, PascalitoPackage.Literals.EXPRESSAO__LEFT) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, PascalitoPackage.Literals.EXPRESSAO__LEFT));
-			if (transientValues.isValueTransient(semanticObject, PascalitoPackage.Literals.EXPRESSAO__RIGHT) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, PascalitoPackage.Literals.EXPRESSAO__RIGHT));
+			if (transientValues.isValueTransient(semanticObject, PascalitoPackage.Literals.EXPRESSION__LEFT) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, PascalitoPackage.Literals.EXPRESSION__LEFT));
+			if (transientValues.isValueTransient(semanticObject, PascalitoPackage.Literals.EXPRESSION__RIGHT) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, PascalitoPackage.Literals.EXPRESSION__RIGHT));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getComutativaAccess().getComutativaLeftAction_1_0(), semanticObject.getLeft());
-		feeder.accept(grammarAccess.getComutativaAccess().getRightN_ComutativaParserRuleCall_1_2_0(), semanticObject.getRight());
+		feeder.accept(grammarAccess.getExpBinLogicalAccess().getExpBinLogicalLeftAction_1_0(), semanticObject.getLeft());
+		feeder.accept(grammarAccess.getExpBinLogicalAccess().getRightPrimaryParserRuleCall_1_2_0(), semanticObject.getRight());
 		feeder.finish();
 	}
 	
 	
 	/**
 	 * Contexts:
-	 *     Comando returns Desvio
-	 *     Desvio returns Desvio
+	 *     Expression returns ExpBinNv0
+	 *     ExpBinNv0 returns ExpBinNv0
+	 *     ExpBinNv0.ExpBinNv0_1_0 returns ExpBinNv0
+	 *     ExpBinNv1 returns ExpBinNv0
+	 *     ExpBinNv1.ExpBinNv1_1_0 returns ExpBinNv0
+	 *     ExpBinLogical returns ExpBinNv0
+	 *     ExpBinLogical.ExpBinLogical_1_0 returns ExpBinNv0
+	 *     Primary returns ExpBinNv0
 	 *
 	 * Constraint:
-	 *     (se=Expressao faca+=Comando* seNao+=Comando*)
+	 *     (left=ExpBinNv0_ExpBinNv0_1_0 right=ExpBinNv1)
 	 */
-	protected void sequence_Desvio(ISerializationContext context, Desvio semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * Contexts:
-	 *     Expressao returns ExpBinLogica
-	 *     Comutativa returns ExpBinLogica
-	 *     Comutativa.Comutativa_1_0 returns ExpBinLogica
-	 *     N_Comutativa returns ExpBinLogica
-	 *     N_Comutativa.N_Comutativa_1_0 returns ExpBinLogica
-	 *     ExpBinLogica returns ExpBinLogica
-	 *     ExpBinLogica.ExpBinLogica_1_0 returns ExpBinLogica
-	 *     Primary returns ExpBinLogica
-	 *
-	 * Constraint:
-	 *     (left=ExpBinLogica_ExpBinLogica_1_0 right=Primary)
-	 */
-	protected void sequence_ExpBinLogica(ISerializationContext context, ExpBinLogica semanticObject) {
+	protected void sequence_ExpBinNv0(ISerializationContext context, ExpBinNv0 semanticObject) {
 		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, PascalitoPackage.Literals.EXPRESSAO__LEFT) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, PascalitoPackage.Literals.EXPRESSAO__LEFT));
-			if (transientValues.isValueTransient(semanticObject, PascalitoPackage.Literals.EXPRESSAO__RIGHT) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, PascalitoPackage.Literals.EXPRESSAO__RIGHT));
+			if (transientValues.isValueTransient(semanticObject, PascalitoPackage.Literals.EXPRESSION__LEFT) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, PascalitoPackage.Literals.EXPRESSION__LEFT));
+			if (transientValues.isValueTransient(semanticObject, PascalitoPackage.Literals.EXPRESSION__RIGHT) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, PascalitoPackage.Literals.EXPRESSION__RIGHT));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getExpBinLogicaAccess().getExpBinLogicaLeftAction_1_0(), semanticObject.getLeft());
-		feeder.accept(grammarAccess.getExpBinLogicaAccess().getRightPrimaryParserRuleCall_1_2_0(), semanticObject.getRight());
+		feeder.accept(grammarAccess.getExpBinNv0Access().getExpBinNv0LeftAction_1_0(), semanticObject.getLeft());
+		feeder.accept(grammarAccess.getExpBinNv0Access().getRightExpBinNv1ParserRuleCall_1_2_0(), semanticObject.getRight());
 		feeder.finish();
 	}
 	
 	
 	/**
 	 * Contexts:
-	 *     Expressao returns ExpNeg
+	 *     Expression returns ExpBinNv1
+	 *     ExpBinNv0 returns ExpBinNv1
+	 *     ExpBinNv0.ExpBinNv0_1_0 returns ExpBinNv1
+	 *     ExpBinNv1 returns ExpBinNv1
+	 *     ExpBinNv1.ExpBinNv1_1_0 returns ExpBinNv1
+	 *     ExpBinLogical returns ExpBinNv1
+	 *     ExpBinLogical.ExpBinLogical_1_0 returns ExpBinNv1
+	 *     Primary returns ExpBinNv1
+	 *
+	 * Constraint:
+	 *     (left=ExpBinNv1_ExpBinNv1_1_0 right=ExpBinLogical)
+	 */
+	protected void sequence_ExpBinNv1(ISerializationContext context, ExpBinNv1 semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, PascalitoPackage.Literals.EXPRESSION__LEFT) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, PascalitoPackage.Literals.EXPRESSION__LEFT));
+			if (transientValues.isValueTransient(semanticObject, PascalitoPackage.Literals.EXPRESSION__RIGHT) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, PascalitoPackage.Literals.EXPRESSION__RIGHT));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getExpBinNv1Access().getExpBinNv1LeftAction_1_0(), semanticObject.getLeft());
+		feeder.accept(grammarAccess.getExpBinNv1Access().getRightExpBinLogicalParserRuleCall_1_2_0(), semanticObject.getRight());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     Expression returns ExpNeg
 	 *     ExpNeg returns ExpNeg
 	 *
 	 * Constraint:
-	 *     nega=Expressao
+	 *     negate=Expression
 	 */
 	protected void sequence_ExpNeg(ISerializationContext context, ExpNeg semanticObject) {
 		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, PascalitoPackage.Literals.EXP_NEG__NEGA) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, PascalitoPackage.Literals.EXP_NEG__NEGA));
+			if (transientValues.isValueTransient(semanticObject, PascalitoPackage.Literals.EXP_NEG__NEGATE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, PascalitoPackage.Literals.EXP_NEG__NEGATE));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getExpNegAccess().getNegaExpressaoParserRuleCall_1_0(), semanticObject.getNega());
+		feeder.accept(grammarAccess.getExpNegAccess().getNegateExpressionParserRuleCall_1_0(), semanticObject.getNegate());
 		feeder.finish();
 	}
 	
 	
 	/**
 	 * Contexts:
-	 *     Comando returns Loop
+	 *     Command returns If
+	 *     If returns If
+	 *
+	 * Constraint:
+	 *     (ifExp=Expression do+=Command* elseCmd+=Command*)
+	 */
+	protected void sequence_If(ISerializationContext context, If semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     Command returns Loop
 	 *     Loop returns Loop
 	 *
 	 * Constraint:
-	 *     (se=Expressao faca+=Comando*)
+	 *     (while=Expression do+=Command*)
 	 */
 	protected void sequence_Loop(ISerializationContext context, Loop semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -292,41 +320,13 @@ public class PascalitoSemanticSequencer extends AbstractDelegatingSemanticSequen
 	
 	/**
 	 * Contexts:
-	 *     Expressao returns N_Comutativa
-	 *     Comutativa returns N_Comutativa
-	 *     Comutativa.Comutativa_1_0 returns N_Comutativa
-	 *     N_Comutativa returns N_Comutativa
-	 *     N_Comutativa.N_Comutativa_1_0 returns N_Comutativa
-	 *     ExpBinLogica returns N_Comutativa
-	 *     ExpBinLogica.ExpBinLogica_1_0 returns N_Comutativa
-	 *     Primary returns N_Comutativa
-	 *
-	 * Constraint:
-	 *     (left=N_Comutativa_N_Comutativa_1_0 right=ExpBinLogica)
-	 */
-	protected void sequence_N_Comutativa(ISerializationContext context, N_Comutativa semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, PascalitoPackage.Literals.EXPRESSAO__LEFT) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, PascalitoPackage.Literals.EXPRESSAO__LEFT));
-			if (transientValues.isValueTransient(semanticObject, PascalitoPackage.Literals.EXPRESSAO__RIGHT) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, PascalitoPackage.Literals.EXPRESSAO__RIGHT));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getN_ComutativaAccess().getN_ComutativaLeftAction_1_0(), semanticObject.getLeft());
-		feeder.accept(grammarAccess.getN_ComutativaAccess().getRightExpBinLogicaParserRuleCall_1_2_0(), semanticObject.getRight());
-		feeder.finish();
-	}
-	
-	
-	/**
-	 * Contexts:
-	 *     Expressao returns NumberLiteral
-	 *     Comutativa returns NumberLiteral
-	 *     Comutativa.Comutativa_1_0 returns NumberLiteral
-	 *     N_Comutativa returns NumberLiteral
-	 *     N_Comutativa.N_Comutativa_1_0 returns NumberLiteral
-	 *     ExpBinLogica returns NumberLiteral
-	 *     ExpBinLogica.ExpBinLogica_1_0 returns NumberLiteral
+	 *     Expression returns NumberLiteral
+	 *     ExpBinNv0 returns NumberLiteral
+	 *     ExpBinNv0.ExpBinNv0_1_0 returns NumberLiteral
+	 *     ExpBinNv1 returns NumberLiteral
+	 *     ExpBinNv1.ExpBinNv1_1_0 returns NumberLiteral
+	 *     ExpBinLogical returns NumberLiteral
+	 *     ExpBinLogical.ExpBinLogical_1_0 returns NumberLiteral
 	 *     Primary returns NumberLiteral
 	 *     NumberLiteral returns NumberLiteral
 	 *
@@ -340,51 +340,51 @@ public class PascalitoSemanticSequencer extends AbstractDelegatingSemanticSequen
 	
 	/**
 	 * Contexts:
-	 *     Procedimento returns Procedimento
+	 *     Procedure returns Procedure
 	 *
 	 * Constraint:
-	 *     (name=ID (parametro+=Variavel parametro+=Variavel*)? bloco=Bloco)
+	 *     (name=ID (parameter+=Variable parameter+=Variable*)? block=Block)
 	 */
-	protected void sequence_Procedimento(ISerializationContext context, Procedimento semanticObject) {
+	protected void sequence_Procedure(ISerializationContext context, Procedure semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
 	/**
 	 * Contexts:
-	 *     Programa returns Programa
+	 *     Program returns Program
 	 *
 	 * Constraint:
-	 *     (Ident=EString bloco=Bloco)
+	 *     (Ident=EString block=Block)
 	 */
-	protected void sequence_Programa(ISerializationContext context, Programa semanticObject) {
+	protected void sequence_Program(ISerializationContext context, Program semanticObject) {
 		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, PascalitoPackage.Literals.PROGRAMA__IDENT) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, PascalitoPackage.Literals.PROGRAMA__IDENT));
-			if (transientValues.isValueTransient(semanticObject, PascalitoPackage.Literals.PROGRAMA__BLOCO) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, PascalitoPackage.Literals.PROGRAMA__BLOCO));
+			if (transientValues.isValueTransient(semanticObject, PascalitoPackage.Literals.PROGRAM__IDENT) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, PascalitoPackage.Literals.PROGRAM__IDENT));
+			if (transientValues.isValueTransient(semanticObject, PascalitoPackage.Literals.PROGRAM__BLOCK) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, PascalitoPackage.Literals.PROGRAM__BLOCK));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getProgramaAccess().getIdentEStringParserRuleCall_1_0(), semanticObject.getIdent());
-		feeder.accept(grammarAccess.getProgramaAccess().getBlocoBlocoParserRuleCall_3_0(), semanticObject.getBloco());
+		feeder.accept(grammarAccess.getProgramAccess().getIdentEStringParserRuleCall_1_0(), semanticObject.getIdent());
+		feeder.accept(grammarAccess.getProgramAccess().getBlockBlockParserRuleCall_3_0(), semanticObject.getBlock());
 		feeder.finish();
 	}
 	
 	
 	/**
 	 * Contexts:
-	 *     Variavel returns Variavel
+	 *     Variable returns Variable
 	 *
 	 * Constraint:
 	 *     name=ID
 	 */
-	protected void sequence_Variavel(ISerializationContext context, Variavel semanticObject) {
+	protected void sequence_Variable(ISerializationContext context, Variable semanticObject) {
 		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, PascalitoPackage.Literals.VARIAVEL__NAME) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, PascalitoPackage.Literals.VARIAVEL__NAME));
+			if (transientValues.isValueTransient(semanticObject, PascalitoPackage.Literals.VARIABLE__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, PascalitoPackage.Literals.VARIABLE__NAME));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getVariavelAccess().getNameIDTerminalRuleCall_1_0(), semanticObject.getName());
+		feeder.accept(grammarAccess.getVariableAccess().getNameIDTerminalRuleCall_1_0(), semanticObject.getName());
 		feeder.finish();
 	}
 	

@@ -67,10 +67,10 @@ public class InternalPascalitoLexer extends Lexer {
         try {
             int _type = T__11;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalPascalito.g:11:7: ( 'programa' )
-            // InternalPascalito.g:11:9: 'programa'
+            // InternalPascalito.g:11:7: ( 'program' )
+            // InternalPascalito.g:11:9: 'program'
             {
-            match("programa"); 
+            match("program"); 
 
 
             }
@@ -189,10 +189,10 @@ public class InternalPascalitoLexer extends Lexer {
         try {
             int _type = T__17;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalPascalito.g:17:7: ( 'procedimento' )
-            // InternalPascalito.g:17:9: 'procedimento'
+            // InternalPascalito.g:17:7: ( 'procedure' )
+            // InternalPascalito.g:17:9: 'procedure'
             {
-            match("procedimento"); 
+            match("procedure"); 
 
 
             }
@@ -210,10 +210,10 @@ public class InternalPascalitoLexer extends Lexer {
         try {
             int _type = T__18;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalPascalito.g:18:7: ( 'inicio' )
-            // InternalPascalito.g:18:9: 'inicio'
+            // InternalPascalito.g:18:7: ( 'start' )
+            // InternalPascalito.g:18:9: 'start'
             {
-            match("inicio"); 
+            match("start"); 
 
 
             }
@@ -231,10 +231,10 @@ public class InternalPascalitoLexer extends Lexer {
         try {
             int _type = T__19;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalPascalito.g:19:7: ( 'fim' )
-            // InternalPascalito.g:19:9: 'fim'
+            // InternalPascalito.g:19:7: ( 'end' )
+            // InternalPascalito.g:19:9: 'end'
             {
-            match("fim"); 
+            match("end"); 
 
 
             }
@@ -1393,27 +1393,27 @@ public class InternalPascalitoLexer extends Lexer {
 
     protected DFA12 dfa12 = new DFA12(this);
     static final String DFA12_eotS =
-        "\1\uffff\1\40\2\uffff\1\40\2\uffff\2\40\2\uffff\2\40\2\uffff\1\60\1\36\3\40\1\67\2\uffff\1\74\1\36\2\uffff\2\36\2\uffff\1\40\3\uffff\1\40\2\uffff\1\40\1\103\1\40\2\uffff\2\40\6\uffff\1\40\1\110\1\40\12\uffff\1\40\1\114\1\40\1\uffff\1\116\2\40\1\121\1\uffff\1\122\2\40\1\uffff\1\40\1\uffff\1\126\1\127\2\uffff\3\40\2\uffff\2\40\1\135\2\40\1\uffff\1\140\1\40\1\uffff\3\40\1\145\1\uffff";
+        "\1\uffff\1\40\2\uffff\1\40\2\uffff\2\40\2\uffff\2\40\2\uffff\1\60\1\36\3\40\1\67\2\uffff\1\74\1\36\2\uffff\2\36\2\uffff\1\40\3\uffff\1\40\2\uffff\3\40\2\uffff\1\105\1\40\6\uffff\1\40\1\110\1\40\12\uffff\1\40\1\114\1\40\1\116\1\40\1\uffff\1\40\1\121\1\uffff\1\122\2\40\1\uffff\1\40\1\uffff\1\126\1\127\2\uffff\2\40\1\132\2\uffff\2\40\1\uffff\1\135\1\40\1\uffff\1\40\1\140\1\uffff";
     static final String DFA12_eofS =
-        "\146\uffff";
+        "\141\uffff";
     static final String DFA12_minS =
-        "\1\0\1\162\2\uffff\1\141\2\uffff\1\146\1\151\2\uffff\1\154\1\157\2\uffff\1\75\1\74\1\116\1\122\1\117\1\76\2\uffff\1\52\1\101\2\uffff\2\0\2\uffff\1\157\3\uffff\1\162\2\uffff\1\151\1\60\1\155\2\uffff\1\163\1\157\6\uffff\1\104\1\60\1\122\12\uffff\1\143\1\60\1\143\1\uffff\1\60\1\145\1\160\1\60\1\uffff\1\60\1\162\1\145\1\uffff\1\151\1\uffff\2\60\2\uffff\1\141\1\144\1\157\2\uffff\1\155\1\151\1\60\1\141\1\155\1\uffff\1\60\1\145\1\uffff\1\156\1\164\1\157\1\60\1\uffff";
+        "\1\0\1\162\2\uffff\1\141\2\uffff\1\164\1\154\2\uffff\1\146\1\157\2\uffff\1\75\1\74\1\116\1\122\1\117\1\76\2\uffff\1\52\1\101\2\uffff\2\0\2\uffff\1\157\3\uffff\1\162\2\uffff\1\141\1\144\1\163\2\uffff\1\60\1\157\6\uffff\1\104\1\60\1\122\12\uffff\1\143\1\60\1\162\1\60\1\145\1\uffff\1\160\1\60\1\uffff\1\60\1\162\1\145\1\uffff\1\164\1\uffff\2\60\2\uffff\1\141\1\144\1\60\2\uffff\1\155\1\165\1\uffff\1\60\1\162\1\uffff\1\145\1\60\1\uffff";
     static final String DFA12_maxS =
-        "\1\uffff\1\162\2\uffff\1\141\2\uffff\1\156\1\151\2\uffff\1\154\1\157\2\uffff\2\75\1\116\1\122\1\117\1\76\2\uffff\1\57\1\172\2\uffff\2\uffff\2\uffff\1\157\3\uffff\1\162\2\uffff\1\151\1\172\1\155\2\uffff\1\163\1\157\6\uffff\1\104\1\172\1\122\12\uffff\1\147\1\172\1\143\1\uffff\1\172\1\145\1\160\1\172\1\uffff\1\172\1\162\1\145\1\uffff\1\151\1\uffff\2\172\2\uffff\1\141\1\144\1\157\2\uffff\1\155\1\151\1\172\1\141\1\155\1\uffff\1\172\1\145\1\uffff\1\156\1\164\1\157\1\172\1\uffff";
+        "\1\uffff\1\162\2\uffff\1\141\2\uffff\1\164\1\156\2\uffff\1\146\1\157\2\uffff\2\75\1\116\1\122\1\117\1\76\2\uffff\1\57\1\172\2\uffff\2\uffff\2\uffff\1\157\3\uffff\1\162\2\uffff\1\141\1\144\1\163\2\uffff\1\172\1\157\6\uffff\1\104\1\172\1\122\12\uffff\1\147\1\172\1\162\1\172\1\145\1\uffff\1\160\1\172\1\uffff\1\172\1\162\1\145\1\uffff\1\164\1\uffff\2\172\2\uffff\1\141\1\144\1\172\2\uffff\1\155\1\165\1\uffff\1\172\1\162\1\uffff\1\145\1\172\1\uffff";
     static final String DFA12_acceptS =
-        "\2\uffff\1\2\1\3\1\uffff\1\5\1\6\2\uffff\1\12\1\13\2\uffff\1\17\1\20\6\uffff\1\31\1\32\2\uffff\1\35\1\36\2\uffff\1\42\1\43\1\uffff\1\35\1\2\1\3\1\uffff\1\5\1\6\3\uffff\1\12\1\13\2\uffff\1\17\1\20\1\23\1\21\1\22\1\24\3\uffff\1\34\1\30\1\31\1\32\1\40\1\41\1\33\1\36\1\37\1\42\3\uffff\1\14\4\uffff\1\26\3\uffff\1\4\1\uffff\1\11\2\uffff\1\25\1\27\3\uffff\1\15\1\16\5\uffff\1\10\2\uffff\1\1\4\uffff\1\7";
+        "\2\uffff\1\2\1\3\1\uffff\1\5\1\6\2\uffff\1\12\1\13\2\uffff\1\17\1\20\6\uffff\1\31\1\32\2\uffff\1\35\1\36\2\uffff\1\42\1\43\1\uffff\1\35\1\2\1\3\1\uffff\1\5\1\6\3\uffff\1\12\1\13\2\uffff\1\17\1\20\1\23\1\21\1\22\1\24\3\uffff\1\34\1\30\1\31\1\32\1\40\1\41\1\33\1\36\1\37\1\42\5\uffff\1\14\2\uffff\1\26\3\uffff\1\4\1\uffff\1\11\2\uffff\1\25\1\27\3\uffff\1\15\1\16\2\uffff\1\10\2\uffff\1\1\2\uffff\1\7";
     static final String DFA12_specialS =
-        "\1\1\32\uffff\1\2\1\0\111\uffff}>";
+        "\1\0\32\uffff\1\1\1\2\104\uffff}>";
     static final String[] DFA12_transitionS = {
-            "\11\36\2\35\2\36\1\35\22\36\1\35\1\36\1\33\4\36\1\34\1\11\1\12\1\26\1\25\1\5\1\24\1\15\1\27\12\32\1\36\1\6\1\16\1\20\1\17\2\36\1\21\12\31\1\14\2\31\1\22\10\31\1\23\2\31\3\36\1\30\1\31\1\36\4\31\1\13\1\10\2\31\1\7\6\31\1\1\5\31\1\4\4\31\1\2\1\36\1\3\uff82\36",
+            "\11\36\2\35\2\36\1\35\22\36\1\35\1\36\1\33\4\36\1\34\1\11\1\12\1\26\1\25\1\5\1\24\1\15\1\27\12\32\1\36\1\6\1\16\1\20\1\17\2\36\1\21\12\31\1\14\2\31\1\22\10\31\1\23\2\31\3\36\1\30\1\31\1\36\4\31\1\10\3\31\1\13\6\31\1\1\2\31\1\7\2\31\1\4\4\31\1\2\1\36\1\3\uff82\36",
             "\1\37",
             "",
             "",
             "\1\43",
             "",
             "",
-            "\1\47\7\uffff\1\46",
-            "\1\50",
+            "\1\46",
+            "\1\50\1\uffff\1\47",
             "",
             "",
             "\1\53",
@@ -1444,11 +1444,11 @@ public class InternalPascalitoLexer extends Lexer {
             "",
             "",
             "\1\102",
-            "\12\40\7\uffff\32\40\4\uffff\1\40\1\uffff\32\40",
+            "\1\103",
             "\1\104",
             "",
             "",
-            "\1\105",
+            "\12\40\7\uffff\32\40\4\uffff\1\40\1\uffff\32\40",
             "\1\106",
             "",
             "",
@@ -1472,9 +1472,9 @@ public class InternalPascalitoLexer extends Lexer {
             "\1\113\3\uffff\1\112",
             "\12\40\7\uffff\32\40\4\uffff\1\40\1\uffff\32\40",
             "\1\115",
-            "",
             "\12\40\7\uffff\32\40\4\uffff\1\40\1\uffff\32\40",
             "\1\117",
+            "",
             "\1\120",
             "\12\40\7\uffff\32\40\4\uffff\1\40\1\uffff\32\40",
             "",
@@ -1490,21 +1490,16 @@ public class InternalPascalitoLexer extends Lexer {
             "",
             "\1\130",
             "\1\131",
-            "\1\132",
+            "\12\40\7\uffff\32\40\4\uffff\1\40\1\uffff\32\40",
             "",
             "",
             "\1\133",
             "\1\134",
+            "",
             "\12\40\7\uffff\32\40\4\uffff\1\40\1\uffff\32\40",
             "\1\136",
+            "",
             "\1\137",
-            "",
-            "\12\40\7\uffff\32\40\4\uffff\1\40\1\uffff\32\40",
-            "\1\141",
-            "",
-            "\1\142",
-            "\1\143",
-            "\1\144",
             "\12\40\7\uffff\32\40\4\uffff\1\40\1\uffff\32\40",
             ""
     };
@@ -1546,16 +1541,6 @@ public class InternalPascalitoLexer extends Lexer {
         	int _s = s;
             switch ( s ) {
                     case 0 : 
-                        int LA12_28 = input.LA(1);
-
-                        s = -1;
-                        if ( ((LA12_28>='\u0000' && LA12_28<='\uFFFF')) ) {s = 62;}
-
-                        else s = 30;
-
-                        if ( s>=0 ) return s;
-                        break;
-                    case 1 : 
                         int LA12_0 = input.LA(1);
 
                         s = -1;
@@ -1571,15 +1556,15 @@ public class InternalPascalitoLexer extends Lexer {
 
                         else if ( (LA12_0==';') ) {s = 6;}
 
-                        else if ( (LA12_0=='i') ) {s = 7;}
+                        else if ( (LA12_0=='s') ) {s = 7;}
 
-                        else if ( (LA12_0=='f') ) {s = 8;}
+                        else if ( (LA12_0=='e') ) {s = 8;}
 
                         else if ( (LA12_0=='(') ) {s = 9;}
 
                         else if ( (LA12_0==')') ) {s = 10;}
 
-                        else if ( (LA12_0=='e') ) {s = 11;}
+                        else if ( (LA12_0=='i') ) {s = 11;}
 
                         else if ( (LA12_0=='L') ) {s = 12;}
 
@@ -1607,7 +1592,7 @@ public class InternalPascalitoLexer extends Lexer {
 
                         else if ( (LA12_0=='^') ) {s = 24;}
 
-                        else if ( ((LA12_0>='B' && LA12_0<='K')||(LA12_0>='M' && LA12_0<='N')||(LA12_0>='P' && LA12_0<='W')||(LA12_0>='Y' && LA12_0<='Z')||LA12_0=='_'||(LA12_0>='a' && LA12_0<='d')||(LA12_0>='g' && LA12_0<='h')||(LA12_0>='j' && LA12_0<='o')||(LA12_0>='q' && LA12_0<='u')||(LA12_0>='w' && LA12_0<='z')) ) {s = 25;}
+                        else if ( ((LA12_0>='B' && LA12_0<='K')||(LA12_0>='M' && LA12_0<='N')||(LA12_0>='P' && LA12_0<='W')||(LA12_0>='Y' && LA12_0<='Z')||LA12_0=='_'||(LA12_0>='a' && LA12_0<='d')||(LA12_0>='f' && LA12_0<='h')||(LA12_0>='j' && LA12_0<='o')||(LA12_0>='q' && LA12_0<='r')||(LA12_0>='t' && LA12_0<='u')||(LA12_0>='w' && LA12_0<='z')) ) {s = 25;}
 
                         else if ( ((LA12_0>='0' && LA12_0<='9')) ) {s = 26;}
 
@@ -1621,11 +1606,21 @@ public class InternalPascalitoLexer extends Lexer {
 
                         if ( s>=0 ) return s;
                         break;
-                    case 2 : 
+                    case 1 : 
                         int LA12_27 = input.LA(1);
 
                         s = -1;
                         if ( ((LA12_27>='\u0000' && LA12_27<='\uFFFF')) ) {s = 62;}
+
+                        else s = 30;
+
+                        if ( s>=0 ) return s;
+                        break;
+                    case 2 : 
+                        int LA12_28 = input.LA(1);
+
+                        s = -1;
+                        if ( ((LA12_28>='\u0000' && LA12_28<='\uFFFF')) ) {s = 62;}
 
                         else s = 30;
 

@@ -4,84 +4,84 @@ grammar org.xtext.example.mydsl.Pascalito with org.eclipse.xtext.common.Terminal
 import "http://www.example.org/pascalito" 
 import "http://www.eclipse.org/emf/2002/Ecore" as ecore
 
-Programa returns Programa:
-	'programa' Ident=EString
+Program returns Program:
+	'program' Ident=EString
 	'{'
-		bloco=Bloco
+		block=Block
 	'}';
 
-Comando returns Comando:
-	CallProcedimento | Atribuicao | Desvio | Loop;
+Command returns Command:
+	CallProc | Atribuition | If | Loop;
 
-Expressao returns Expressao:
-	ExpNeg | Comutativa;
+Expression returns Expression:
+	ExpNeg | ExpBinNv0;
 
 EString returns ecore::EString:
 	STRING | ID;
 
-Bloco returns Bloco:
-	{Bloco}
-		('var' defvariavel+=Variavel ( "," defvariavel+=Variavel)* ";")*
-		('procedimento' defprocedimento+=Procedimento)*
-		'inicio' (executa+=Comando)* 'fim'
+Block returns Block:
+	{Block}
+		('var' defVariable+=Variable ( "," defVariable+=Variable)* ";")*
+		('procedure' defprocedure+=Procedure)*
+		'start' (execute+=Command)* 'end'
 	;
 
-Variavel returns Variavel:
-	{Variavel}
+Variable returns Variable:
+	{Variable}
 		name=ID
 //		(' -> ' Valor=EString)? - DEFINIR SE VAMOS FAZER ATRIBUIÇÃO NA DEFINIÇÃO.
 	;
 
-Procedimento returns Procedimento:
-		(name=ID "(" (parametro+=Variavel ( "," parametro+=Variavel)* )?")")
+Procedure returns Procedure:
+		(name=ID "(" (parameter+=Variable ( "," parameter+=Variable)* )?")")
 				"{"
-		bloco=Bloco
+		block=Block
 		"}"
 	;
 	
-CallProcedimento returns CallProcedimento:
-definido=[Procedimento|ID]
-		( '(' (parametro+=Expressao ( "," parametro+=Expressao)* )? ')' )
+CallProc returns CallProc:
+defined=[Procedure|ID]
+		( '(' (parameter+=Expression ( "," parameter+=Expression)* )? ')' )
 	';';
 
-Atribuicao returns Atribuicao:
-		atribui=[Variavel|ID]
-		OP_ASSIGNMENT atribuiResultado=Expressao ';'
+Atribuition returns Atribuition:
+		sets=[Variable|ID]
+		OP_ASSIGNMENT atribuiResultado=Expression ';'
 		;
 
-Desvio returns Desvio:
-		'if' '(' se=Expressao ')'
-		 '{' (faca+=Comando)* '}'
-		('else' '{' (seNao+=Comando)* '}' )?
+If returns If:
+		'if' '(' ifExp=Expression ')'
+		 '{' (do+=Command)* '}'
+		('else' '{' (elseCmd+=Command)* '}' )?
 	;
 
 Loop returns Loop:
-	'Loop' '(' se=Expressao ')'
-		'{' (faca+=Comando)* '}'
+	'Loop' '(' while=Expression ')'
+		'{' (do+=Command)* '}'
 	;
 
-CallProc returns CallProc:
-representaProc=[Procedimento|ID]
-	( '(' (parametro+=Expressao ( "," parametro+=Expressao)* )? ')' );
+CallProcExp returns CallProcExp:
+represent=[Procedure|ID]
+	( '(' (parameter+=Expression ( "," parameter+=Expression)* )? ')' );
 
-CallVariavel returns CallVariavel:
-		representa=[Variavel|ID]
+CallVariable returns CallVariable:
+		represent=[Variable|ID]
 	;
 
-Comutativa returns Expressao:
-  N_Comutativa ({Comutativa.left=current} OP_ARIT_PRIO_0 right=N_Comutativa)*;
+ExpBinNv0 returns Expression:
+  ExpBinNv1 ({ExpBinNv0.left=current} OP_ARIT_PRIO_0 right=ExpBinNv1)*;
   
-N_Comutativa returns Expressao:
-  ExpBinLogica ({N_Comutativa.left=current} OP_ARIT_PRIO_1 right=ExpBinLogica)*;
+ExpBinNv1 returns Expression:
+  ExpBinLogical ({ExpBinNv1.left=current} OP_ARIT_PRIO_1 right=ExpBinLogical)*;
   
-ExpBinLogica returns Expressao:
-  Primary ({ExpBinLogica.left=current} OP_COMPARISON right=Primary)*;
+ExpBinLogical returns Expression:
+  Primary ({ExpBinLogical.left=current} OP_COMPARISON right=Primary)*;
   
-Primary returns Expressao:
+Primary returns Expression:
   NumberLiteral |
-  CallProc |
-  CallVariavel |
-  '(' Comutativa ')';
+  CallProcExp |
+  CallVariable |
+  '(' ExpBinNv0 ')';
   
 NumberLiteral:
 	{NumberLiteral}
@@ -92,7 +92,7 @@ EBigDecimal returns ecore::EBigDecimal:
 	INT '.' INT;
 
 ExpNeg returns ExpNeg:
-	 OP_NEGATE nega=Expressao
+	 OP_NEGATE negate=Expression
 	;
 
 EInt returns ecore::EInt:
