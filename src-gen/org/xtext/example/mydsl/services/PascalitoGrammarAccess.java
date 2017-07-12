@@ -224,9 +224,7 @@ public class PascalitoGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
 		
 		//Variable:
-		//	{Variable} name=ID
-		//	//		(' -> ' Valor=EString)? - DEFINIR SE VAMOS FAZER ATRIBUI플O NA DEFINI플O.
-		//;
+		//	{Variable} name=ID;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//{Variable} name=ID
@@ -895,13 +893,14 @@ public class PascalitoGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cANDKeyword_5 = (Keyword)cAlternatives.eContents().get(5);
 		private final Keyword cORKeyword_6 = (Keyword)cAlternatives.eContents().get(6);
 		private final Keyword cXORKeyword_7 = (Keyword)cAlternatives.eContents().get(7);
+		private final Keyword cExclamationMarkEqualsSignKeyword_8 = (Keyword)cAlternatives.eContents().get(8);
 		
 		////terminal 
 		//OP_COMPARISON:
-		//	'<' | '>' | '=<' | '>=' | '==' | 'AND' | 'OR' | 'XOR';
+		//	'<' | '>' | '=<' | '>=' | '==' | 'AND' | 'OR' | 'XOR' | '!=';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'<' | '>' | '=<' | '>=' | '==' | 'AND' | 'OR' | 'XOR'
+		//'<' | '>' | '=<' | '>=' | '==' | 'AND' | 'OR' | 'XOR' | '!='
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//'<'
@@ -927,6 +926,9 @@ public class PascalitoGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//'XOR'
 		public Keyword getXORKeyword_7() { return cXORKeyword_7; }
+		
+		//'!='
+		public Keyword getExclamationMarkEqualsSignKeyword_8() { return cExclamationMarkEqualsSignKeyword_8; }
 	}
 	public class OP_ARIT_PRIO_0Elements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.example.mydsl.Pascalito.OP_ARIT_PRIO_0");
@@ -1141,9 +1143,7 @@ public class PascalitoGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//Variable:
-	//	{Variable} name=ID
-	//	//		(' -> ' Valor=EString)? - DEFINIR SE VAMOS FAZER ATRIBUI플O NA DEFINI플O.
-	//;
+	//	{Variable} name=ID;
 	public VariableElements getVariableAccess() {
 		return pVariable;
 	}
@@ -1321,7 +1321,7 @@ public class PascalitoGrammarAccess extends AbstractGrammarElementFinder {
 	
 	////terminal 
 	//OP_COMPARISON:
-	//	'<' | '>' | '=<' | '>=' | '==' | 'AND' | 'OR' | 'XOR';
+	//	'<' | '>' | '=<' | '>=' | '==' | 'AND' | 'OR' | 'XOR' | '!=';
 	public OP_COMPARISONElements getOP_COMPARISONAccess() {
 		return pOP_COMPARISON;
 	}

@@ -20,6 +20,7 @@ public class InternalPascalitoLexer extends Lexer {
     public static final int T__16=16;
     public static final int T__38=38;
     public static final int T__17=17;
+    public static final int T__39=39;
     public static final int T__18=18;
     public static final int T__11=11;
     public static final int T__33=33;
@@ -541,10 +542,11 @@ public class InternalPascalitoLexer extends Lexer {
         try {
             int _type = T__34;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalPascalito.g:34:7: ( '-' )
-            // InternalPascalito.g:34:9: '-'
+            // InternalPascalito.g:34:7: ( '!=' )
+            // InternalPascalito.g:34:9: '!='
             {
-            match('-'); 
+            match("!="); 
+
 
             }
 
@@ -561,10 +563,10 @@ public class InternalPascalitoLexer extends Lexer {
         try {
             int _type = T__35;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalPascalito.g:35:7: ( '+' )
-            // InternalPascalito.g:35:9: '+'
+            // InternalPascalito.g:35:7: ( '-' )
+            // InternalPascalito.g:35:9: '-'
             {
-            match('+'); 
+            match('-'); 
 
             }
 
@@ -581,10 +583,10 @@ public class InternalPascalitoLexer extends Lexer {
         try {
             int _type = T__36;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalPascalito.g:36:7: ( '*' )
-            // InternalPascalito.g:36:9: '*'
+            // InternalPascalito.g:36:7: ( '+' )
+            // InternalPascalito.g:36:9: '+'
             {
-            match('*'); 
+            match('+'); 
 
             }
 
@@ -601,10 +603,10 @@ public class InternalPascalitoLexer extends Lexer {
         try {
             int _type = T__37;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalPascalito.g:37:7: ( '/' )
-            // InternalPascalito.g:37:9: '/'
+            // InternalPascalito.g:37:7: ( '*' )
+            // InternalPascalito.g:37:9: '*'
             {
-            match('/'); 
+            match('*'); 
 
             }
 
@@ -621,8 +623,28 @@ public class InternalPascalitoLexer extends Lexer {
         try {
             int _type = T__38;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalPascalito.g:38:7: ( '->' )
-            // InternalPascalito.g:38:9: '->'
+            // InternalPascalito.g:38:7: ( '/' )
+            // InternalPascalito.g:38:9: '/'
+            {
+            match('/'); 
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        }
+    }
+    // $ANTLR end "T__38"
+
+    // $ANTLR start "T__39"
+    public final void mT__39() throws RecognitionException {
+        try {
+            int _type = T__39;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // InternalPascalito.g:39:7: ( '->' )
+            // InternalPascalito.g:39:9: '->'
             {
             match("->"); 
 
@@ -635,17 +657,17 @@ public class InternalPascalitoLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "T__38"
+    // $ANTLR end "T__39"
 
     // $ANTLR start "RULE_ID"
     public final void mRULE_ID() throws RecognitionException {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalPascalito.g:1557:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
-            // InternalPascalito.g:1557:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // InternalPascalito.g:1563:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
+            // InternalPascalito.g:1563:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
-            // InternalPascalito.g:1557:11: ( '^' )?
+            // InternalPascalito.g:1563:11: ( '^' )?
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -654,7 +676,7 @@ public class InternalPascalitoLexer extends Lexer {
             }
             switch (alt1) {
                 case 1 :
-                    // InternalPascalito.g:1557:11: '^'
+                    // InternalPascalito.g:1563:11: '^'
                     {
                     match('^'); 
 
@@ -672,7 +694,7 @@ public class InternalPascalitoLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // InternalPascalito.g:1557:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // InternalPascalito.g:1563:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             loop2:
             do {
                 int alt2=2;
@@ -721,10 +743,10 @@ public class InternalPascalitoLexer extends Lexer {
         try {
             int _type = RULE_INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalPascalito.g:1559:10: ( ( '0' .. '9' )+ )
-            // InternalPascalito.g:1559:12: ( '0' .. '9' )+
+            // InternalPascalito.g:1565:10: ( ( '0' .. '9' )+ )
+            // InternalPascalito.g:1565:12: ( '0' .. '9' )+
             {
-            // InternalPascalito.g:1559:12: ( '0' .. '9' )+
+            // InternalPascalito.g:1565:12: ( '0' .. '9' )+
             int cnt3=0;
             loop3:
             do {
@@ -738,7 +760,7 @@ public class InternalPascalitoLexer extends Lexer {
 
                 switch (alt3) {
             	case 1 :
-            	    // InternalPascalito.g:1559:13: '0' .. '9'
+            	    // InternalPascalito.g:1565:13: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -770,10 +792,10 @@ public class InternalPascalitoLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalPascalito.g:1561:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
-            // InternalPascalito.g:1561:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // InternalPascalito.g:1567:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
+            // InternalPascalito.g:1567:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             {
-            // InternalPascalito.g:1561:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // InternalPascalito.g:1567:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -791,10 +813,10 @@ public class InternalPascalitoLexer extends Lexer {
             }
             switch (alt6) {
                 case 1 :
-                    // InternalPascalito.g:1561:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+                    // InternalPascalito.g:1567:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
                     {
                     match('\"'); 
-                    // InternalPascalito.g:1561:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // InternalPascalito.g:1567:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop4:
                     do {
                         int alt4=3;
@@ -810,7 +832,7 @@ public class InternalPascalitoLexer extends Lexer {
 
                         switch (alt4) {
                     	case 1 :
-                    	    // InternalPascalito.g:1561:21: '\\\\' .
+                    	    // InternalPascalito.g:1567:21: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -818,7 +840,7 @@ public class InternalPascalitoLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // InternalPascalito.g:1561:28: ~ ( ( '\\\\' | '\"' ) )
+                    	    // InternalPascalito.g:1567:28: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -843,10 +865,10 @@ public class InternalPascalitoLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // InternalPascalito.g:1561:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+                    // InternalPascalito.g:1567:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
                     {
                     match('\''); 
-                    // InternalPascalito.g:1561:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // InternalPascalito.g:1567:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop5:
                     do {
                         int alt5=3;
@@ -862,7 +884,7 @@ public class InternalPascalitoLexer extends Lexer {
 
                         switch (alt5) {
                     	case 1 :
-                    	    // InternalPascalito.g:1561:54: '\\\\' .
+                    	    // InternalPascalito.g:1567:54: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -870,7 +892,7 @@ public class InternalPascalitoLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // InternalPascalito.g:1561:61: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // InternalPascalito.g:1567:61: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -913,12 +935,12 @@ public class InternalPascalitoLexer extends Lexer {
         try {
             int _type = RULE_ML_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalPascalito.g:1563:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // InternalPascalito.g:1563:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // InternalPascalito.g:1569:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // InternalPascalito.g:1569:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // InternalPascalito.g:1563:24: ( options {greedy=false; } : . )*
+            // InternalPascalito.g:1569:24: ( options {greedy=false; } : . )*
             loop7:
             do {
                 int alt7=2;
@@ -943,7 +965,7 @@ public class InternalPascalitoLexer extends Lexer {
 
                 switch (alt7) {
             	case 1 :
-            	    // InternalPascalito.g:1563:52: .
+            	    // InternalPascalito.g:1569:52: .
             	    {
             	    matchAny(); 
 
@@ -973,12 +995,12 @@ public class InternalPascalitoLexer extends Lexer {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalPascalito.g:1565:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // InternalPascalito.g:1565:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // InternalPascalito.g:1571:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // InternalPascalito.g:1571:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // InternalPascalito.g:1565:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // InternalPascalito.g:1571:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop8:
             do {
                 int alt8=2;
@@ -991,7 +1013,7 @@ public class InternalPascalitoLexer extends Lexer {
 
                 switch (alt8) {
             	case 1 :
-            	    // InternalPascalito.g:1565:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // InternalPascalito.g:1571:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -1011,7 +1033,7 @@ public class InternalPascalitoLexer extends Lexer {
                 }
             } while (true);
 
-            // InternalPascalito.g:1565:40: ( ( '\\r' )? '\\n' )?
+            // InternalPascalito.g:1571:40: ( ( '\\r' )? '\\n' )?
             int alt10=2;
             int LA10_0 = input.LA(1);
 
@@ -1020,9 +1042,9 @@ public class InternalPascalitoLexer extends Lexer {
             }
             switch (alt10) {
                 case 1 :
-                    // InternalPascalito.g:1565:41: ( '\\r' )? '\\n'
+                    // InternalPascalito.g:1571:41: ( '\\r' )? '\\n'
                     {
-                    // InternalPascalito.g:1565:41: ( '\\r' )?
+                    // InternalPascalito.g:1571:41: ( '\\r' )?
                     int alt9=2;
                     int LA9_0 = input.LA(1);
 
@@ -1031,7 +1053,7 @@ public class InternalPascalitoLexer extends Lexer {
                     }
                     switch (alt9) {
                         case 1 :
-                            // InternalPascalito.g:1565:41: '\\r'
+                            // InternalPascalito.g:1571:41: '\\r'
                             {
                             match('\r'); 
 
@@ -1063,10 +1085,10 @@ public class InternalPascalitoLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalPascalito.g:1567:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // InternalPascalito.g:1567:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalPascalito.g:1573:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // InternalPascalito.g:1573:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // InternalPascalito.g:1567:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalPascalito.g:1573:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt11=0;
             loop11:
             do {
@@ -1120,8 +1142,8 @@ public class InternalPascalitoLexer extends Lexer {
         try {
             int _type = RULE_ANY_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalPascalito.g:1569:16: ( . )
-            // InternalPascalito.g:1569:18: .
+            // InternalPascalito.g:1575:16: ( . )
+            // InternalPascalito.g:1575:18: .
             {
             matchAny(); 
 
@@ -1136,8 +1158,8 @@ public class InternalPascalitoLexer extends Lexer {
     // $ANTLR end "RULE_ANY_OTHER"
 
     public void mTokens() throws RecognitionException {
-        // InternalPascalito.g:1:8: ( T__11 | T__12 | T__13 | T__14 | T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | T__22 | T__23 | T__24 | T__25 | T__26 | T__27 | T__28 | T__29 | T__30 | T__31 | T__32 | T__33 | T__34 | T__35 | T__36 | T__37 | T__38 | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER )
-        int alt12=35;
+        // InternalPascalito.g:1:8: ( T__11 | T__12 | T__13 | T__14 | T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | T__22 | T__23 | T__24 | T__25 | T__26 | T__27 | T__28 | T__29 | T__30 | T__31 | T__32 | T__33 | T__34 | T__35 | T__36 | T__37 | T__38 | T__39 | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER )
+        int alt12=36;
         alt12 = dfa12.predict(input);
         switch (alt12) {
             case 1 :
@@ -1337,49 +1359,56 @@ public class InternalPascalitoLexer extends Lexer {
                 }
                 break;
             case 29 :
-                // InternalPascalito.g:1:178: RULE_ID
+                // InternalPascalito.g:1:178: T__39
+                {
+                mT__39(); 
+
+                }
+                break;
+            case 30 :
+                // InternalPascalito.g:1:184: RULE_ID
                 {
                 mRULE_ID(); 
 
                 }
                 break;
-            case 30 :
-                // InternalPascalito.g:1:186: RULE_INT
+            case 31 :
+                // InternalPascalito.g:1:192: RULE_INT
                 {
                 mRULE_INT(); 
 
                 }
                 break;
-            case 31 :
-                // InternalPascalito.g:1:195: RULE_STRING
+            case 32 :
+                // InternalPascalito.g:1:201: RULE_STRING
                 {
                 mRULE_STRING(); 
 
                 }
                 break;
-            case 32 :
-                // InternalPascalito.g:1:207: RULE_ML_COMMENT
+            case 33 :
+                // InternalPascalito.g:1:213: RULE_ML_COMMENT
                 {
                 mRULE_ML_COMMENT(); 
 
                 }
                 break;
-            case 33 :
-                // InternalPascalito.g:1:223: RULE_SL_COMMENT
+            case 34 :
+                // InternalPascalito.g:1:229: RULE_SL_COMMENT
                 {
                 mRULE_SL_COMMENT(); 
 
                 }
                 break;
-            case 34 :
-                // InternalPascalito.g:1:239: RULE_WS
+            case 35 :
+                // InternalPascalito.g:1:245: RULE_WS
                 {
                 mRULE_WS(); 
 
                 }
                 break;
-            case 35 :
-                // InternalPascalito.g:1:247: RULE_ANY_OTHER
+            case 36 :
+                // InternalPascalito.g:1:253: RULE_ANY_OTHER
                 {
                 mRULE_ANY_OTHER(); 
 
@@ -1393,72 +1422,73 @@ public class InternalPascalitoLexer extends Lexer {
 
     protected DFA12 dfa12 = new DFA12(this);
     static final String DFA12_eotS =
-        "\1\uffff\1\40\2\uffff\1\40\2\uffff\2\40\2\uffff\2\40\2\uffff\1\60\1\36\3\40\1\67\2\uffff\1\74\1\36\2\uffff\2\36\2\uffff\1\40\3\uffff\1\40\2\uffff\3\40\2\uffff\1\105\1\40\6\uffff\1\40\1\110\1\40\12\uffff\1\40\1\114\1\40\1\116\1\40\1\uffff\1\40\1\121\1\uffff\1\122\2\40\1\uffff\1\40\1\uffff\1\126\1\127\2\uffff\2\40\1\132\2\uffff\2\40\1\uffff\1\135\1\40\1\uffff\1\40\1\140\1\uffff";
+        "\1\uffff\1\41\2\uffff\1\41\2\uffff\2\41\2\uffff\2\41\2\uffff\1\61\1\37\3\41\1\37\1\71\2\uffff\1\76\1\37\2\uffff\2\37\2\uffff\1\41\3\uffff\1\41\2\uffff\3\41\2\uffff\1\107\1\41\6\uffff\1\41\1\112\1\41\13\uffff\1\41\1\116\1\41\1\120\1\41\1\uffff\1\41\1\123\1\uffff\1\124\2\41\1\uffff\1\41\1\uffff\1\130\1\131\2\uffff\2\41\1\134\2\uffff\2\41\1\uffff\1\137\1\41\1\uffff\1\41\1\142\1\uffff";
     static final String DFA12_eofS =
-        "\141\uffff";
+        "\143\uffff";
     static final String DFA12_minS =
-        "\1\0\1\162\2\uffff\1\141\2\uffff\1\164\1\154\2\uffff\1\146\1\157\2\uffff\1\75\1\74\1\116\1\122\1\117\1\76\2\uffff\1\52\1\101\2\uffff\2\0\2\uffff\1\157\3\uffff\1\162\2\uffff\1\141\1\144\1\163\2\uffff\1\60\1\157\6\uffff\1\104\1\60\1\122\12\uffff\1\143\1\60\1\162\1\60\1\145\1\uffff\1\160\1\60\1\uffff\1\60\1\162\1\145\1\uffff\1\164\1\uffff\2\60\2\uffff\1\141\1\144\1\60\2\uffff\1\155\1\165\1\uffff\1\60\1\162\1\uffff\1\145\1\60\1\uffff";
+        "\1\0\1\162\2\uffff\1\141\2\uffff\1\164\1\154\2\uffff\1\146\1\157\2\uffff\1\75\1\74\1\116\1\122\1\117\1\75\1\76\2\uffff\1\52\1\101\2\uffff\2\0\2\uffff\1\157\3\uffff\1\162\2\uffff\1\141\1\144\1\163\2\uffff\1\60\1\157\6\uffff\1\104\1\60\1\122\13\uffff\1\143\1\60\1\162\1\60\1\145\1\uffff\1\160\1\60\1\uffff\1\60\1\162\1\145\1\uffff\1\164\1\uffff\2\60\2\uffff\1\141\1\144\1\60\2\uffff\1\155\1\165\1\uffff\1\60\1\162\1\uffff\1\145\1\60\1\uffff";
     static final String DFA12_maxS =
-        "\1\uffff\1\162\2\uffff\1\141\2\uffff\1\164\1\156\2\uffff\1\146\1\157\2\uffff\2\75\1\116\1\122\1\117\1\76\2\uffff\1\57\1\172\2\uffff\2\uffff\2\uffff\1\157\3\uffff\1\162\2\uffff\1\141\1\144\1\163\2\uffff\1\172\1\157\6\uffff\1\104\1\172\1\122\12\uffff\1\147\1\172\1\162\1\172\1\145\1\uffff\1\160\1\172\1\uffff\1\172\1\162\1\145\1\uffff\1\164\1\uffff\2\172\2\uffff\1\141\1\144\1\172\2\uffff\1\155\1\165\1\uffff\1\172\1\162\1\uffff\1\145\1\172\1\uffff";
+        "\1\uffff\1\162\2\uffff\1\141\2\uffff\1\164\1\156\2\uffff\1\146\1\157\2\uffff\2\75\1\116\1\122\1\117\1\75\1\76\2\uffff\1\57\1\172\2\uffff\2\uffff\2\uffff\1\157\3\uffff\1\162\2\uffff\1\141\1\144\1\163\2\uffff\1\172\1\157\6\uffff\1\104\1\172\1\122\13\uffff\1\147\1\172\1\162\1\172\1\145\1\uffff\1\160\1\172\1\uffff\1\172\1\162\1\145\1\uffff\1\164\1\uffff\2\172\2\uffff\1\141\1\144\1\172\2\uffff\1\155\1\165\1\uffff\1\172\1\162\1\uffff\1\145\1\172\1\uffff";
     static final String DFA12_acceptS =
-        "\2\uffff\1\2\1\3\1\uffff\1\5\1\6\2\uffff\1\12\1\13\2\uffff\1\17\1\20\6\uffff\1\31\1\32\2\uffff\1\35\1\36\2\uffff\1\42\1\43\1\uffff\1\35\1\2\1\3\1\uffff\1\5\1\6\3\uffff\1\12\1\13\2\uffff\1\17\1\20\1\23\1\21\1\22\1\24\3\uffff\1\34\1\30\1\31\1\32\1\40\1\41\1\33\1\36\1\37\1\42\5\uffff\1\14\2\uffff\1\26\3\uffff\1\4\1\uffff\1\11\2\uffff\1\25\1\27\3\uffff\1\15\1\16\2\uffff\1\10\2\uffff\1\1\2\uffff\1\7";
+        "\2\uffff\1\2\1\3\1\uffff\1\5\1\6\2\uffff\1\12\1\13\2\uffff\1\17\1\20\7\uffff\1\32\1\33\2\uffff\1\36\1\37\2\uffff\1\43\1\44\1\uffff\1\36\1\2\1\3\1\uffff\1\5\1\6\3\uffff\1\12\1\13\2\uffff\1\17\1\20\1\23\1\21\1\22\1\24\3\uffff\1\30\1\35\1\31\1\32\1\33\1\41\1\42\1\34\1\37\1\40\1\43\5\uffff\1\14\2\uffff\1\26\3\uffff\1\4\1\uffff\1\11\2\uffff\1\25\1\27\3\uffff\1\15\1\16\2\uffff\1\10\2\uffff\1\1\2\uffff\1\7";
     static final String DFA12_specialS =
-        "\1\0\32\uffff\1\1\1\2\104\uffff}>";
+        "\1\2\33\uffff\1\1\1\0\105\uffff}>";
     static final String[] DFA12_transitionS = {
-            "\11\36\2\35\2\36\1\35\22\36\1\35\1\36\1\33\4\36\1\34\1\11\1\12\1\26\1\25\1\5\1\24\1\15\1\27\12\32\1\36\1\6\1\16\1\20\1\17\2\36\1\21\12\31\1\14\2\31\1\22\10\31\1\23\2\31\3\36\1\30\1\31\1\36\4\31\1\10\3\31\1\13\6\31\1\1\2\31\1\7\2\31\1\4\4\31\1\2\1\36\1\3\uff82\36",
-            "\1\37",
+            "\11\37\2\36\2\37\1\36\22\37\1\36\1\24\1\34\4\37\1\35\1\11\1\12\1\27\1\26\1\5\1\25\1\15\1\30\12\33\1\37\1\6\1\16\1\20\1\17\2\37\1\21\12\32\1\14\2\32\1\22\10\32\1\23\2\32\3\37\1\31\1\32\1\37\4\32\1\10\3\32\1\13\6\32\1\1\2\32\1\7\2\32\1\4\4\32\1\2\1\37\1\3\uff82\37",
+            "\1\40",
             "",
             "",
-            "\1\43",
+            "\1\44",
             "",
             "",
-            "\1\46",
-            "\1\50\1\uffff\1\47",
+            "\1\47",
+            "\1\51\1\uffff\1\50",
             "",
             "",
-            "\1\53",
             "\1\54",
+            "\1\55",
             "",
             "",
-            "\1\57",
-            "\1\61\1\62",
-            "\1\63",
+            "\1\60",
+            "\1\62\1\63",
             "\1\64",
             "\1\65",
             "\1\66",
+            "\1\67",
+            "\1\70",
             "",
             "",
-            "\1\72\4\uffff\1\73",
-            "\32\40\4\uffff\1\40\1\uffff\32\40",
+            "\1\74\4\uffff\1\75",
+            "\32\41\4\uffff\1\41\1\uffff\32\41",
             "",
             "",
-            "\0\76",
-            "\0\76",
-            "",
-            "",
-            "\1\100",
-            "",
-            "",
-            "",
-            "\1\101",
+            "\0\100",
+            "\0\100",
             "",
             "",
             "\1\102",
+            "",
+            "",
+            "",
             "\1\103",
+            "",
+            "",
             "\1\104",
-            "",
-            "",
-            "\12\40\7\uffff\32\40\4\uffff\1\40\1\uffff\32\40",
+            "\1\105",
             "\1\106",
             "",
             "",
+            "\12\41\7\uffff\32\41\4\uffff\1\41\1\uffff\32\41",
+            "\1\110",
             "",
             "",
             "",
             "",
-            "\1\107",
-            "\12\40\7\uffff\32\40\4\uffff\1\40\1\uffff\32\40",
+            "",
+            "",
             "\1\111",
+            "\12\41\7\uffff\32\41\4\uffff\1\41\1\uffff\32\41",
+            "\1\113",
             "",
             "",
             "",
@@ -1469,38 +1499,39 @@ public class InternalPascalitoLexer extends Lexer {
             "",
             "",
             "",
-            "\1\113\3\uffff\1\112",
-            "\12\40\7\uffff\32\40\4\uffff\1\40\1\uffff\32\40",
-            "\1\115",
-            "\12\40\7\uffff\32\40\4\uffff\1\40\1\uffff\32\40",
+            "",
+            "\1\115\3\uffff\1\114",
+            "\12\41\7\uffff\32\41\4\uffff\1\41\1\uffff\32\41",
             "\1\117",
+            "\12\41\7\uffff\32\41\4\uffff\1\41\1\uffff\32\41",
+            "\1\121",
             "",
-            "\1\120",
-            "\12\40\7\uffff\32\40\4\uffff\1\40\1\uffff\32\40",
+            "\1\122",
+            "\12\41\7\uffff\32\41\4\uffff\1\41\1\uffff\32\41",
             "",
-            "\12\40\7\uffff\32\40\4\uffff\1\40\1\uffff\32\40",
-            "\1\123",
-            "\1\124",
-            "",
+            "\12\41\7\uffff\32\41\4\uffff\1\41\1\uffff\32\41",
             "\1\125",
+            "\1\126",
             "",
-            "\12\40\7\uffff\32\40\4\uffff\1\40\1\uffff\32\40",
-            "\12\40\7\uffff\32\40\4\uffff\1\40\1\uffff\32\40",
+            "\1\127",
             "",
-            "",
-            "\1\130",
-            "\1\131",
-            "\12\40\7\uffff\32\40\4\uffff\1\40\1\uffff\32\40",
+            "\12\41\7\uffff\32\41\4\uffff\1\41\1\uffff\32\41",
+            "\12\41\7\uffff\32\41\4\uffff\1\41\1\uffff\32\41",
             "",
             "",
+            "\1\132",
             "\1\133",
-            "\1\134",
+            "\12\41\7\uffff\32\41\4\uffff\1\41\1\uffff\32\41",
             "",
-            "\12\40\7\uffff\32\40\4\uffff\1\40\1\uffff\32\40",
+            "",
+            "\1\135",
             "\1\136",
             "",
-            "\1\137",
-            "\12\40\7\uffff\32\40\4\uffff\1\40\1\uffff\32\40",
+            "\12\41\7\uffff\32\41\4\uffff\1\41\1\uffff\32\41",
+            "\1\140",
+            "",
+            "\1\141",
+            "\12\41\7\uffff\32\41\4\uffff\1\41\1\uffff\32\41",
             ""
     };
 
@@ -1534,13 +1565,33 @@ public class InternalPascalitoLexer extends Lexer {
             this.transition = DFA12_transition;
         }
         public String getDescription() {
-            return "1:1: Tokens : ( T__11 | T__12 | T__13 | T__14 | T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | T__22 | T__23 | T__24 | T__25 | T__26 | T__27 | T__28 | T__29 | T__30 | T__31 | T__32 | T__33 | T__34 | T__35 | T__36 | T__37 | T__38 | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER );";
+            return "1:1: Tokens : ( T__11 | T__12 | T__13 | T__14 | T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | T__22 | T__23 | T__24 | T__25 | T__26 | T__27 | T__28 | T__29 | T__30 | T__31 | T__32 | T__33 | T__34 | T__35 | T__36 | T__37 | T__38 | T__39 | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER );";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             IntStream input = _input;
         	int _s = s;
             switch ( s ) {
                     case 0 : 
+                        int LA12_29 = input.LA(1);
+
+                        s = -1;
+                        if ( ((LA12_29>='\u0000' && LA12_29<='\uFFFF')) ) {s = 64;}
+
+                        else s = 31;
+
+                        if ( s>=0 ) return s;
+                        break;
+                    case 1 : 
+                        int LA12_28 = input.LA(1);
+
+                        s = -1;
+                        if ( ((LA12_28>='\u0000' && LA12_28<='\uFFFF')) ) {s = 64;}
+
+                        else s = 31;
+
+                        if ( s>=0 ) return s;
+                        break;
+                    case 2 : 
                         int LA12_0 = input.LA(1);
 
                         s = -1;
@@ -1582,47 +1633,29 @@ public class InternalPascalitoLexer extends Lexer {
 
                         else if ( (LA12_0=='X') ) {s = 19;}
 
-                        else if ( (LA12_0=='-') ) {s = 20;}
+                        else if ( (LA12_0=='!') ) {s = 20;}
 
-                        else if ( (LA12_0=='+') ) {s = 21;}
+                        else if ( (LA12_0=='-') ) {s = 21;}
 
-                        else if ( (LA12_0=='*') ) {s = 22;}
+                        else if ( (LA12_0=='+') ) {s = 22;}
 
-                        else if ( (LA12_0=='/') ) {s = 23;}
+                        else if ( (LA12_0=='*') ) {s = 23;}
 
-                        else if ( (LA12_0=='^') ) {s = 24;}
+                        else if ( (LA12_0=='/') ) {s = 24;}
 
-                        else if ( ((LA12_0>='B' && LA12_0<='K')||(LA12_0>='M' && LA12_0<='N')||(LA12_0>='P' && LA12_0<='W')||(LA12_0>='Y' && LA12_0<='Z')||LA12_0=='_'||(LA12_0>='a' && LA12_0<='d')||(LA12_0>='f' && LA12_0<='h')||(LA12_0>='j' && LA12_0<='o')||(LA12_0>='q' && LA12_0<='r')||(LA12_0>='t' && LA12_0<='u')||(LA12_0>='w' && LA12_0<='z')) ) {s = 25;}
+                        else if ( (LA12_0=='^') ) {s = 25;}
 
-                        else if ( ((LA12_0>='0' && LA12_0<='9')) ) {s = 26;}
+                        else if ( ((LA12_0>='B' && LA12_0<='K')||(LA12_0>='M' && LA12_0<='N')||(LA12_0>='P' && LA12_0<='W')||(LA12_0>='Y' && LA12_0<='Z')||LA12_0=='_'||(LA12_0>='a' && LA12_0<='d')||(LA12_0>='f' && LA12_0<='h')||(LA12_0>='j' && LA12_0<='o')||(LA12_0>='q' && LA12_0<='r')||(LA12_0>='t' && LA12_0<='u')||(LA12_0>='w' && LA12_0<='z')) ) {s = 26;}
 
-                        else if ( (LA12_0=='\"') ) {s = 27;}
+                        else if ( ((LA12_0>='0' && LA12_0<='9')) ) {s = 27;}
 
-                        else if ( (LA12_0=='\'') ) {s = 28;}
+                        else if ( (LA12_0=='\"') ) {s = 28;}
 
-                        else if ( ((LA12_0>='\t' && LA12_0<='\n')||LA12_0=='\r'||LA12_0==' ') ) {s = 29;}
+                        else if ( (LA12_0=='\'') ) {s = 29;}
 
-                        else if ( ((LA12_0>='\u0000' && LA12_0<='\b')||(LA12_0>='\u000B' && LA12_0<='\f')||(LA12_0>='\u000E' && LA12_0<='\u001F')||LA12_0=='!'||(LA12_0>='#' && LA12_0<='&')||LA12_0==':'||(LA12_0>='?' && LA12_0<='@')||(LA12_0>='[' && LA12_0<=']')||LA12_0=='`'||LA12_0=='|'||(LA12_0>='~' && LA12_0<='\uFFFF')) ) {s = 30;}
+                        else if ( ((LA12_0>='\t' && LA12_0<='\n')||LA12_0=='\r'||LA12_0==' ') ) {s = 30;}
 
-                        if ( s>=0 ) return s;
-                        break;
-                    case 1 : 
-                        int LA12_27 = input.LA(1);
-
-                        s = -1;
-                        if ( ((LA12_27>='\u0000' && LA12_27<='\uFFFF')) ) {s = 62;}
-
-                        else s = 30;
-
-                        if ( s>=0 ) return s;
-                        break;
-                    case 2 : 
-                        int LA12_28 = input.LA(1);
-
-                        s = -1;
-                        if ( ((LA12_28>='\u0000' && LA12_28<='\uFFFF')) ) {s = 62;}
-
-                        else s = 30;
+                        else if ( ((LA12_0>='\u0000' && LA12_0<='\b')||(LA12_0>='\u000B' && LA12_0<='\f')||(LA12_0>='\u000E' && LA12_0<='\u001F')||(LA12_0>='#' && LA12_0<='&')||LA12_0==':'||(LA12_0>='?' && LA12_0<='@')||(LA12_0>='[' && LA12_0<=']')||LA12_0=='`'||LA12_0=='|'||(LA12_0>='~' && LA12_0<='\uFFFF')) ) {s = 31;}
 
                         if ( s>=0 ) return s;
                         break;

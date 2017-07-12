@@ -1447,6 +1447,12 @@ ruleOP_COMPARISON returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleT
 			$current.merge(kw);
 			newLeafNode(kw, grammarAccess.getOP_COMPARISONAccess().getXORKeyword_7());
 		}
+		    |
+		kw='!='
+		{
+			$current.merge(kw);
+			newLeafNode(kw, grammarAccess.getOP_COMPARISONAccess().getExclamationMarkEqualsSignKeyword_8());
+		}
 	)
 ;
 

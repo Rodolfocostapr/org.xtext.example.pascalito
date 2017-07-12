@@ -89,7 +89,7 @@ public class PascalitoSyntacticSequencer extends AbstractSyntacticSequencer {
 	}
 	
 	/**
-	 * OP_COMPARISON: '<'|'>'|'=<'|'>=' |'==' | 'AND' | 'OR' | 'XOR';
+	 * OP_COMPARISON: '<'|'>'|'=<'|'>=' |'==' | 'AND' | 'OR' | 'XOR' | '!=';
 	 */
 	protected String getOP_COMPARISONToken(EObject semanticObject, RuleCall ruleCall, INode node) {
 		if (node != null)

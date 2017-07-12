@@ -29,7 +29,6 @@ Block returns Block:
 Variable returns Variable:
 	{Variable}
 		name=ID
-//		(' -> ' Valor=EString)? - DEFINIR SE VAMOS FAZER ATRIBUIÇÃO NA DEFINIÇÃO.
 	;
 
 Procedure returns Procedure:
@@ -102,7 +101,7 @@ EBoolean returns ecore::EBoolean:
 	'true' | 'false';
 	
 //terminal 
-OP_COMPARISON: '<'|'>'|'=<'|'>=' |'==' | 'AND' | 'OR' | 'XOR';
+OP_COMPARISON: '<'|'>'|'=<'|'>=' |'==' | 'AND' | 'OR' | 'XOR' | '!=';
 //terminal 
 OP_ARIT_PRIO_0:	'-'|'+';
 OP_ARIT_PRIO_1: '*'|'/';
